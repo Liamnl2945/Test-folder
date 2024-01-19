@@ -30,7 +30,10 @@ public class RobotContainer {
     
 
     
-
+    public RobotContainer(){
+      configureButtonBindings();
+      
+    }
     
 
 
