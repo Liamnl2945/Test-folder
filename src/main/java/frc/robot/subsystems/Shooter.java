@@ -8,24 +8,26 @@ public class Shooter extends SubsystemBase {
     
     private final TalonFX ShooterLeft = new TalonFX(4);
     private final TalonFX ShooterRight = new TalonFX(5);
-    private final double speed = 0.4;
+    private final double speed = 1.0;
 
     public Shooter(){
         ShooterLeft.setInverted(true);
+        ShooterRight.setInverted(false);
         ShooterRight.setNeutralMode(NeutralModeValue.Brake);
+        ShooterLeft.setNeutralMode(NeutralModeValue.Brake);
     }
 
     public void runShooter() {
-        ShooterLeft.set(-0.4);
-        ShooterRight.set(-0.4);
+        ShooterLeft.set(speed);
+        ShooterRight.set(speed);
     }
 
     public void reverseShooter() {
-        ShooterLeft.set(speed*2);
-        ShooterRight.set(speed*2);
+        ShooterLeft.set(-speed/2);
+        ShooterRight.set(-speed/2);
     }
 
-    public void stopIntake(){
+    public void stopShooter(){
         ShooterLeft.set(0);
         ShooterRight.set(0);
     }

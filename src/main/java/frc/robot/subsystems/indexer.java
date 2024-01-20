@@ -24,13 +24,15 @@ public indexer(){
 }
 
 public void runIndexer() {
-    indexerbot.set(-0.4);
-    indexertop.set(-0.4);
+    indexerbot.set(speed);
+    indexertop.set(speed);
+    System.out.println("RUN INDEXER \n\n\n");
 }
 
 public void reverseIndexer() {
-    indexerbot.set(speed*2);
-    indexertop.set(speed*2);
+    indexerbot.set(-speed);
+    indexertop.set(-speed);
+    System.out.println("REVERSE INDEXER \n\n\n");
 }
 public void slowReverseIndexer(){
     indexerbot.set(speed);

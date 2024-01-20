@@ -12,31 +12,34 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase{
     private final WPI_TalonSRX intakeLeft = new WPI_TalonSRX(constants.Intake.intakeLeft);
     private final WPI_TalonSRX intakeRight = new WPI_TalonSRX(constants.Intake.intakeRight);
-    private final double speed = 0.4;
+    private final double speed = 1.0;
 
 public Intake(){
     intakeLeft.configFactoryDefault();
     intakeRight.configFactoryDefault();
 
     intakeLeft.setInverted(true);
-    intakeRight.setInverted(false);
+    intakeRight.setInverted(true);
     
     intakeLeft.setNeutralMode(NeutralMode.Brake);
     intakeRight.setNeutralMode(NeutralMode.Brake);
 }
 
 public void runIntake() {
-    intakeLeft.set(-0.4);
-    intakeRight.set(-0.4);
+    intakeLeft.set(speed);
+    intakeRight.set(speed);
+    System.out.println("RUN INTAKE \n\n\n");
 }
 
 public void reverseIntake() {
-    intakeLeft.set(speed*2);
-    intakeRight.set(speed*2);
+    intakeLeft.set(-speed);
+    intakeRight.set(-speed);
+    System.out.println("REVERSE INTAKE \n\n\n");
 }
 public void slowReverseIntake(){
     intakeLeft.set(speed);
     intakeRight.set(speed);
+    System.out.println("REVERSE INTAKE SLOW \n\n\n");
 }
 
 public void stopIntake(){
