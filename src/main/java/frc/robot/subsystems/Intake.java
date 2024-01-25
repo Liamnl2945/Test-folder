@@ -19,7 +19,7 @@ public Intake(){
     intakeRight.configFactoryDefault();
 
     intakeLeft.setInverted(true);
-    intakeRight.setInverted(true);
+    intakeRight.setInverted(false);
     
     intakeLeft.setNeutralMode(NeutralMode.Brake);
     intakeRight.setNeutralMode(NeutralMode.Brake);
