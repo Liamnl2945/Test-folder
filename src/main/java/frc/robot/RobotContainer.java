@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Intake_Indexer;
+import frc.robot.commands.climberCom;
 import frc.robot.subsystems.*;      
 
 public class RobotContainer {
@@ -15,6 +16,8 @@ public class RobotContainer {
    private final indexer I_Indexer = new indexer();
    //shooter
    private final Shooter S_Shooter = new Shooter();
+   //climber
+   private final Climber C_Climber = new Climber();
 
    public final Joystick manipulator = new Joystick(1);
    //intake
@@ -27,9 +30,11 @@ public class RobotContainer {
    //shooter
    public final JoystickButton shooterRun = new JoystickButton(manipulator, XboxController.Button.kA.value);
    public final JoystickButton shooterReverse = new JoystickButton(manipulator, XboxController.Button.kX.value);
+   public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kB.value);
     
     //one button code
     private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,manipulator);
+    private final climberCom climberCommand = new climberCom(C_Climber, manipulator);
     
     public RobotContainer(){
       configureButtonBindings();
@@ -60,11 +65,14 @@ public class RobotContainer {
          shooterRun.onFalse(new InstantCommand(()-> S_Shooter.stopShooter()));
          shooterReverse.onTrue(new InstantCommand(() -> S_Shooter.reverseShooter()));
          shooterReverse.onFalse(new InstantCommand(()-> S_Shooter.stopShooter()));
+         slowShoot.onTrue(new InstantCommand(()-> S_Shooter.slowShoot()));
+         slowShoot.onFalse(new InstantCommand(()-> S_Shooter.stopShooter()));
 
      }  
      
      public void configureDefaultCommands(){
       I_Indexer.setDefaultCommand(intake_Indexer);
       I_Intake.setDefaultCommand(intake_Indexer);
+      C_Climber.setDefaultCommand(climberCommand);
      }
 }

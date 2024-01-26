@@ -32,7 +32,7 @@ public class Intake_Indexer extends Command {
         else if(intakeStick.getPOV() == 135 || intakeStick.getPOV() == 180 || intakeStick.getPOV() == 225){
             intake.reverseIntake();
             indexer.reverseIndexer();
-            System.out.println("\nt    INTAKE & INDEXER IN!!!");
+            System.out.println("\nt    INTAKE & INDEXER Out!!!");
         }
         else{
             intake.stopIntake();
