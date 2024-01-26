@@ -24,6 +24,10 @@ public class Shooter extends SubsystemBase {
         //ShooterRight.setVoltage(12.0);
         System.out.println("\n\nShooter motor left speed " +ShooterLeft.get() + " Shooter motor Right speed  " + ShooterRight.get() );
     }
+    public void slowShoot(){
+        ShooterLeft.set(0.4);
+        ShooterRight.set(0.4);
+    }
 
     public void reverseShooter() {
         ShooterLeft.set(1.0);

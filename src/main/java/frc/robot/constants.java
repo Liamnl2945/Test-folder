@@ -16,4 +16,8 @@ public class constants {
         public static final int ShooterRigth = 5;
         
     }
+    public final class Climber {
+        public static final int climberLeft = 6;
+        public static final int climberRight = 7;
+    }
 }
