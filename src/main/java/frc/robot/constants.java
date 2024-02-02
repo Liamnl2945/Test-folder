@@ -20,4 +20,7 @@ public class constants {
         public static final int climberLeft = 6;
         public static final int climberRight = 7;
     }
+    public final class LimelightConstants{
+        public static final int PIPELINE_VISION = 0;
+    }
 }

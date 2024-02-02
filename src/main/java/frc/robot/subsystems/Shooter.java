@@ -25,19 +25,20 @@ public class Shooter extends SubsystemBase {
         System.out.println("\n\nShooter motor left speed " +ShooterLeft.get() + " Shooter motor Right speed  " + ShooterRight.get() );
     }
     public void slowShoot(){
-        ShooterLeft.set(0.4);
-        ShooterRight.set(0.4);
+        ShooterLeft.set(0.175);
+        ShooterRight.set(0.175);
     }
 
     public void reverseShooter() {
-        ShooterLeft.set(1.0);
-        ShooterRight.set(1.0);
+        ShooterLeft.set(-0.5);
+        ShooterRight.set(-0.5);
     }
 
     public void stopShooter(){
         ShooterLeft.set(0);
         ShooterRight.set(0);
     }
+    
 
     
 }
