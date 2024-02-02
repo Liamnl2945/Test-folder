@@ -2,6 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Intake_Indexer;
@@ -18,6 +20,11 @@ public class RobotContainer {
    private final Shooter S_Shooter = new Shooter();
    //climber
    private final Climber C_Climber = new Climber();
+
+   //limelight
+   private final LimeLight L_Limelight = new LimeLight();
+
+    ShuffleboardTab limelightTab; 
 
    public final Joystick manipulator = new Joystick(1);
    //intake
@@ -39,6 +46,13 @@ public class RobotContainer {
     public RobotContainer(){
       configureButtonBindings();
       configureDefaultCommands();
+
+      
+    //limelightTab = Shuffleboard.getTab("Limelight Tab");
+    //L_Limelight.configLimelightTab(limelightTab);
+    //L_Limelight.getShuffleboardValues();
+      
+
       
     }
     
