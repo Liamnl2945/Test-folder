@@ -4,7 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -24,7 +26,7 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-
+  private double interval = 2.5;
 
   public LimeLight limelight;
 
@@ -32,7 +34,10 @@ public class Robot extends TimedRobot {
 
   public ShuffleboardTab limelightTab;
 
+  Timer  rumbleTimer = new Timer();
 
+
+  
 
   
 
@@ -45,13 +50,24 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-
+    //rumbleTimer.start();
    
 
     m_robotContainer = new RobotContainer();
+
+    
   
 
   }
+  public void rumbleTask() {
+    RobotContainer.manipulator.setRumble(RumbleType.kLeftRumble, 1.0);
+    RobotContainer.manipulator.setRumble(RumbleType.kRightRumble, 1.0);
+   }
+
+     public void endRumbleTask() {
+    RobotContainer.manipulator.setRumble(RumbleType.kLeftRumble, 0.0);
+    RobotContainer.manipulator.setRumble(RumbleType.kRightRumble, 0.0);
+   }
 
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
@@ -62,6 +78,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    if(rumbleTimer.hasElapsed(interval)){
+      rumbleTask();
+    }
+    if(rumbleTimer.hasElapsed(interval*2)){
+      endRumbleTask();
+      rumbleTimer.reset();
+    }
+    
 
      CommandScheduler.getInstance().run();
   }
@@ -99,15 +123,21 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    rumbleTimer.start();
+  }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    endRumbleTask();
+  }
 
   /** This function is called periodically when disabled. */
   @Override

@@ -1,7 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -24,9 +26,15 @@ public class RobotContainer {
    //limelight
    private final LimeLight L_Limelight = new LimeLight();
 
-    ShuffleboardTab limelightTab; 
+  ShuffleboardTab limelightTab; 
 
-   public final Joystick manipulator = new Joystick(1);
+  //joysticks
+  public final static Joystick manipulator = new Joystick(1);
+
+   //Timer  rumbleTimer = new Timer();
+   
+  
+   
    //intake
    //public final JoystickButton intakeIn = new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value);
   // public final JoystickButton intakeOut = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
@@ -48,9 +56,10 @@ public class RobotContainer {
       configureDefaultCommands();
 
       
-    //limelightTab = Shuffleboard.getTab("Limelight Tab");
+    limelightTab = Shuffleboard.getTab("Limelight Tab");
     //L_Limelight.configLimelightTab(limelightTab);
     //L_Limelight.getShuffleboardValues();
+    
       
 
       
