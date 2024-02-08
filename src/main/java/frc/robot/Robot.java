@@ -26,6 +26,9 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
+  public static CTREConfigs ctreConfigs;
+
+
   private double interval = 2.5;
 
   public LimeLight limelight;
@@ -51,10 +54,12 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
     //rumbleTimer.start();
-   
+    
+    ctreConfigs = new CTREConfigs();   
 
     m_robotContainer = new RobotContainer();
 
+    
     
   
 
