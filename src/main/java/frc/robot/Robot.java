@@ -85,13 +85,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    if(rumbleTimer.hasElapsed(interval)){
+    /*if(rumbleTimer.hasElapsed(interval)){
       rumbleTask();
     }
     if(rumbleTimer.hasElapsed(interval*2)){
       endRumbleTask();
       rumbleTimer.reset();
-    }
+    }*/
     
 
      CommandScheduler.getInstance().run();
@@ -131,7 +131,7 @@ public class Robot extends TimedRobot {
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
-    rumbleTimer.start();
+    //rumbleTimer.start();
   }
 
   /** This function is called periodically during operator control. */
@@ -148,7 +148,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically when disabled. */
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    endRumbleTask();
+  }
 
   /** This function is called once when test mode is enabled. */
   @Override

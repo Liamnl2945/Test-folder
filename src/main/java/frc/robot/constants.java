@@ -24,22 +24,22 @@ public class constants {
     public static final double stickDeadband = 0.15;
     
     public final class Intake{
-        public static final int intakeLeft = 7;
-        public static final int intakeRight = 8;
+        public static final int intakeLeft = 8;
+        public static final int intakeRight = 9;
     }
     public final class indexer{
-        public static final int indexerbot = 9;
-        public static final int indexertop = 10;
+        public static final int indexerbot = 10;
+        public static final int indexertop = 11;
     }
 
     public final class Shooter {
-        public static final int ShooterLeft = 11;
-        public static final int ShooterRigth = 12;
+        public static final int ShooterLeft = 12;
+        public static final int ShooterRigth = 13;
         
     }
     public final class Climber {
-        public static final int climberLeft = 13;
-        public static final int climberRight = 14;
+        public static final int climberLeft = 14;
+        public static final int climberRight = 15;
     }
     public final class LimelightConstants{
         public static final int PIPELINE_VISION = 0;
