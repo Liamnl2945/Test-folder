@@ -3,10 +3,18 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.path.PathPlannerPath;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Intake_Indexer;
@@ -24,12 +32,12 @@ public class RobotContainer {
    private final Shooter S_Shooter = new Shooter();
    //climber
    private final Climber C_Climber = new Climber();
-
    //Swerve 
    private final Swerve s_Swerve = new Swerve();
-
    //limelight
   
+  //AUTOS 
+    private final SendableChooser<Command> autoChooser;
 
   //ShuffleboardTab limelightTab; 
 
@@ -70,6 +78,11 @@ public class RobotContainer {
     
     public RobotContainer(){
 
+      
+      // Register Named Commands
+        NamedCommands.registerCommand("autoBalance", s_Swerve.ExamplePath());
+        
+
 
       s_Swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -82,6 +95,11 @@ public class RobotContainer {
             ) 
         );
         
+
+      // Build an auto chooser. This will use Commands.none() as the default option.
+      autoChooser = AutoBuilder.buildAutoChooser();
+
+      SmartDashboard.putData("Auto Chooser", autoChooser);
 
 
       configureButtonBindings();
@@ -138,4 +156,13 @@ public class RobotContainer {
       I_Intake.setDefaultCommand(intake_Indexer);
       C_Climber.setDefaultCommand(climberCommand);
      }
+     public Command getAutonomousCommand() {
+
+      // Load the path you want to follow using its name in the GUI
+        PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
+
+      // Create a path following command using AutoBuilder. This will also trigger event markers.
+
+        return autoChooser.getSelected();
+    }
 }
