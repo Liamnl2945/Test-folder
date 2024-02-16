@@ -27,17 +27,12 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  private NetworkTable limelightTable;
-  private static final double TAG_WIDTH_INCHES = 6.5;
-  private static final double HORIZONTAL_FOV = 63.3;
-  private static final double FOCAL_LENGTH = 17.5;
+
+  limelightData aprilData = new limelightData();
 
   public static CTREConfigs ctreConfigs;
 
 
-  private double interval = 2.5;
-
-  private RobotContainer m_robotContainer;
 
   public ShuffleboardTab limelightTab;
 
@@ -57,13 +52,10 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-    limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
     //rumbleTimer.start();
     
     
     ctreConfigs = new CTREConfigs();   
-
-    m_robotContainer = new RobotContainer();
 
     
     
@@ -142,31 +134,9 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-        double[] targetPose = limelightTable.getEntry("targetpose_cameraspace").getDoubleArray(new double[6]);
-
-        double targetX = limelightTable.getEntry("tx").getDouble(0.0);
-        double targetY = limelightTable.getEntry("ty").getDouble(0.0);
-        double targetA = limelightTable.getEntry("ta").getDouble(0.0);
-        double targetS = limelightTable.getEntry("ts").getDouble(0.0);
-
-        double targetXC = targetPose[0];
-        double targetYC = targetPose[1];
-        double targetZC = targetPose[2];
-        double targetRoll = targetPose[3];
-        double targetPitch = targetPose[4];
-        double targetYaw = targetPose[5]; 
-
-       System.out.println(Math.sqrt((Math.pow(targetXC, 2)) + Math.pow(targetZC, 2)));
-       // System.out.println("Roll: " + targetRoll + "   Pitch: " + targetPitch + "   Yaw: " + targetYaw);
-        //System.out.println("X: " + targetXC + "   Y: " + targetYC + "   Z: " + targetZC);
-        //System.out.println("Distance to Tag: " + distance);
+    aprilData.calculate(); 
   }
-  private double estimateDistance(double area, double targetRotation){
-    double apparentWidthPixels = Math.sqrt(area);
-    double adustedWidthPixels = apparentWidthPixels/Math.abs(Math.cos(Math.toRadians(targetRotation)));
-    double distance = (TAG_WIDTH_INCHES * FOCAL_LENGTH)/(2*adustedWidthPixels*Math.tan(Math.toRadians(HORIZONTAL_FOV/2)));
-    return distance;
-  }
+
 
   /** This function is called once when the robot is disabled. */
   @Override

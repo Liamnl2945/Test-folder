@@ -63,6 +63,8 @@ public class RobotContainer {
    public final JoystickButton shooterRun = new JoystickButton(manipulator, XboxController.Button.kA.value);
    public final JoystickButton shooterReverse = new JoystickButton(manipulator, XboxController.Button.kX.value);
    public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kB.value);
+      public final JoystickButton aim = new JoystickButton(manipulator, XboxController.Button.kY.value);
+
     
     //one button code
     private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,manipulator);
@@ -78,7 +80,8 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(),
-                () -> speedThrottle.getAsBoolean()
+                () -> speedThrottle.getAsBoolean(),
+                () -> aim.getAsBoolean()
             ) 
         );
         
