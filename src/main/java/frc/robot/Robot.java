@@ -27,8 +27,10 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-
-  limelightData aprilData = new limelightData();
+  private NetworkTable limelightTable;
+  private static final double TAG_WIDTH_INCHES = 6.5;
+  private static final double HORIZONTAL_FOV = 63.3;
+  private static final double FOCAL_LENGTH = 17.5;
 
   public static CTREConfigs ctreConfigs;
 
@@ -52,6 +54,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+    limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
     //rumbleTimer.start();
     
     
@@ -105,9 +108,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
+   // m_autoSelected = m_chooser.getSelected();
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    //System.out.println("Auto selected: " + m_autoSelected);
   }
 
   /** This function is called periodically during autonomous. */

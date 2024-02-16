@@ -12,12 +12,19 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.FollowPathHolonomic;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -41,6 +48,32 @@ public class Swerve extends SubsystemBase {
             new SwerveModule(3, constants.Swerve.Mod3.constants)
         };
         swerveOdometry = new SwerveDriveOdometry(constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
+
+
+         AutoBuilder.configureHolonomic(
+            this::getPose,
+            this::resetPose,
+            this::getSpeeds,
+            this::driveRobotRelative,
+            new HolonomicPathFollowerConfig(                     
+                    new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                    new PIDConstants(0.05, 0.0, 0.0), // Rotation PID constants
+                    4.5, // Max module speed, in m/s
+                    0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+                    new ReplanningConfig() // Default path replanning config. See the API for the options here
+             ), // Adjust config values as needed
+            () -> { // Boolean supplier that controls when the path will be mirrored for the red alliance
+              // This will flip the path being followed to the red side of the field.
+              // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+              var alliance = DriverStation.getAlliance();
+              if (alliance.isPresent()) {
+                return alliance.get() == DriverStation.Alliance.Red;
+              }
+              return false;
+             }, // Mirroring logic for red alliance
+            this
+        );
     }
 
    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -150,6 +183,34 @@ public void resetModulesToAbsolute(){
                         rotation);
         }
     }
+    public void resetPose(Pose2d pose) {
+        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
+    }
+
+    public ChassisSpeeds getRobotRelativeSpeeds(ChassisSpeeds fieldRelativeSpeeds) {
+        return ChassisSpeeds.fromFieldRelativeSpeeds(
+            fieldRelativeSpeeds.vxMetersPerSecond,
+            fieldRelativeSpeeds.vyMetersPerSecond,
+            fieldRelativeSpeeds.omegaRadiansPerSecond,
+            getHeading()
+        );
+    }
+    public ChassisSpeeds getSpeeds() {
+        return constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
+      }
+    
+
+    public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
+        SwerveModuleState[] moduleStates = 
+            constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
+        // ... rest of your drive logic ...
+    }
+    
+    
+
+    
+
+    
 
     @Override
     public void periodic(){
@@ -160,5 +221,37 @@ public void resetModulesToAbsolute(){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
+    }
+
+    public Command ExamplePath() {
+
+        PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
+
+        return new FollowPathHolonomic(
+                path,
+                this::getPose,
+                this::getSpeeds,
+                this::driveRobotRelative,
+                new HolonomicPathFollowerConfig(                     
+                    new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                    new PIDConstants(0.05, 0.0, 0.0), // Rotation PID constants
+                    4.5, // Max module speed, in m/s
+                    0.4, // Drive base radius in meters. Distance from robot center to furthest module.
+                    new ReplanningConfig() // Default path replanning config. See the API for the options here
+                ),
+            () -> {
+                    // Boolean supplier that controls when the path will be mirrored for the red alliance
+                    // This will flip the path being followed to the red side of the field.
+                    // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+                    var alliance = DriverStation.getAlliance();
+                    if (alliance.isPresent()) {
+                        return alliance.get() == DriverStation.Alliance.Red;
+                    }
+                    return false;
+                },
+                this // Reference to this subsystem to set requirements
+        );
+
     }
 }
