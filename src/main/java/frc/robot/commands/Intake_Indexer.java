@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.subsystems.indexer;
 import frc.robot.subsystems.Intake;
@@ -11,6 +12,8 @@ public class Intake_Indexer extends Command {
     private final Intake intake;
     private final indexer indexer;
     public final Joystick intakeStick;
+    
+
 
     public Intake_Indexer(Intake intake, indexer indexer, Joystick intakeStick){
 
@@ -28,6 +31,7 @@ public class Intake_Indexer extends Command {
             intake.runIntake();
             indexer.runIndexer();
             System.out.println("\n INTAKE & INDEXER IN!!!");
+            
         }
         else if(intakeStick.getPOV() == 135 || intakeStick.getPOV() == 180 || intakeStick.getPOV() == 225){
             intake.reverseIntake();
@@ -39,6 +43,7 @@ public class Intake_Indexer extends Command {
             indexer.stopIndexer();
             //System.out.println("INTAKE & INDEXER ARE OFF");
         }
+
     }
 
 }
