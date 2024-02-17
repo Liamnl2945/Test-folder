@@ -18,19 +18,20 @@ public class climberCom extends Command{
 
     @Override 
     public void execute() {
+        double climbLeft = manipulator.getRawAxis(1); // Get the left stick's Y-axis value
+         // Get right stick's Y-axis value
+        double climbRight = manipulator.getRawAxis(5); // Use axis 5 for right stick Y
 
-
-      double climbLeft = manipulator.getRawAxis(1);
-      double climbRight = manipulator.getRawAxis(5);
-
-      
-     
-        if(Math.abs(climbLeft) < .15){
-            climbLeft = 0;
-        } 
-        if(Math.abs(climbRight)<.15){
+        // Use rightStickY for your climber logic (consider deadband if needed)
+        if (Math.abs(climbRight) < 0.15) {
             climbRight = 0;
         }
+
+        // Use leftStickY for your climber logic
+        if (Math.abs(climbLeft) < 0.15) {
+            climbLeft = 0;
+        }
+    
         
         Climber.climbUpLeft(climbLeft);
         Climber.climbUpRight(climbRight);

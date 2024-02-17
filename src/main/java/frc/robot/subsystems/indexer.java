@@ -3,45 +3,57 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants;
 
 public class indexer extends SubsystemBase {
 
-    private final WPI_TalonSRX indexerbot = new WPI_TalonSRX(constants.indexer.indexerbot);
-    private final WPI_TalonSRX indexertop = new WPI_TalonSRX(constants.indexer.indexertop);
+    private final WPI_TalonSRX indexerRight = new WPI_TalonSRX(constants.indexer.indexerRight);
+    private final WPI_TalonSRX indexerLeft = new WPI_TalonSRX(constants.indexer.indexerLeft);
+    public final DigitalInput limitSwitchRight = new DigitalInput(constants.indexer.limitSwitchRightPort);
+    public final DigitalInput limitSwitchLeft = new DigitalInput(constants.indexer.limitSwitchLeftPort);
     private final double speed = 0.4;
 
 public indexer(){
-    indexerbot.configFactoryDefault();
-    indexertop.configFactoryDefault();
+    indexerRight.configFactoryDefault();
+    indexerLeft.configFactoryDefault();
 
-    indexerbot.setInverted(true);
-    indexertop.setInverted(false);
+    indexerRight.setInverted(true);
+    indexerLeft.setInverted(false);
     
-    indexerbot.setNeutralMode(NeutralMode.Brake);
-    indexertop.setNeutralMode(NeutralMode.Brake);
+    indexerRight.setNeutralMode(NeutralMode.Brake);
+    indexerLeft.setNeutralMode(NeutralMode.Brake);
 }
 
 public void runIndexer() {
-    indexerbot.set(speed);
-    indexertop.set(speed);
-    System.out.println("RUN INDEXER \n\n\n");
+    if (!limitSwitchLeft.get() || !limitSwitchRight.get()) {  // Check if top limit switch is not pressed
+        indexerRight.set(speed);
+        indexerLeft.set(speed);
+        System.out.println("RUN INDEXER \n\n\n");
+    } else {
+        stopIndexer();  // Stop if limit switch is activated
+    }
 }
 
 public void reverseIndexer() {
-    indexerbot.set(-speed);
-    indexertop.set(-speed);
-    System.out.println("REVERSE INDEXER \n\n\n");
+    if (limitSwitchLeft.get() || limitSwitchRight.get()) {  // Check if bottom limit switch is not pressed
+        indexerRight.set(-speed);
+        indexerLeft.set(-speed);
+        System.out.println("REVERSE INDEXER \n\n\n");
+    } else {
+        stopIndexer();  // Stop if limit switch is activated
+    }
 }
+
 public void slowReverseIndexer(){
-    indexerbot.set(speed);
-    indexertop.set(speed);
+    indexerRight.set(speed);
+    indexerLeft.set(speed);
 }
 
 public void stopIndexer(){
-    indexerbot.set(0);
-    indexertop.set(0);
+    indexerRight.set(0);
+    indexerLeft.set(0);
 }
 
 

@@ -24,12 +24,15 @@ public class constants {
     public static final double stickDeadband = 0.15;
     
     public final class Intake{
-        public static final int intakeLeft = 8;
-        public static final int intakeRight = 9;
+        public static final int intakeBot = 8;
+        public static final int intakeTop = 9;
     }
     public final class indexer{
-        public static final int indexerbot = 10;
-        public static final int indexertop = 11;
+        public static final int indexerLeft = 10;
+        public static final int indexerRight = 11;
+        public static final int limitSwitchRightPort = 0;
+        public static final int limitSwitchLeftPort = 1;
+
     }
 
     public final class Shooter {

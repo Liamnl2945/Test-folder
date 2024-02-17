@@ -10,41 +10,41 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase{
-    private final WPI_TalonSRX intakeLeft = new WPI_TalonSRX(constants.Intake.intakeLeft);
-    private final WPI_TalonSRX intakeRight = new WPI_TalonSRX(constants.Intake.intakeRight);
+    private final WPI_TalonSRX intakeTop = new WPI_TalonSRX(constants.Intake.intakeTop);
+    private final WPI_TalonSRX intakeBot = new WPI_TalonSRX(constants.Intake.intakeBot);
     private final double speed = 1.0;
 
 public Intake(){
-    intakeLeft.configFactoryDefault();
-    intakeRight.configFactoryDefault();
+    intakeTop.configFactoryDefault();
+    intakeBot.configFactoryDefault();
 
-    intakeLeft.setInverted(true);
-    intakeRight.setInverted(false);
+    intakeTop.setInverted(true);
+    intakeBot.setInverted(false);
     
-    intakeLeft.setNeutralMode(NeutralMode.Brake);
-    intakeRight.setNeutralMode(NeutralMode.Brake);
+    intakeTop.setNeutralMode(NeutralMode.Brake);
+    intakeBot.setNeutralMode(NeutralMode.Brake);
 }
 
 public void runIntake() {
-    intakeLeft.set(speed);
-    intakeRight.set(speed);
+    intakeTop.set(speed);
+    intakeBot.set(speed);
     System.out.println("RUN INTAKE \n\n\n");
 }
 
 public void reverseIntake() {
-    intakeLeft.set(-speed);
-    intakeRight.set(-speed);
+    intakeTop.set(-speed);
+    intakeBot.set(-speed);
     System.out.println("REVERSE INTAKE \n\n\n");
 }
 public void slowReverseIntake(){
-    intakeLeft.set(speed);
-    intakeRight.set(speed);
+    intakeTop.set(speed);
+    intakeBot.set(speed);
     System.out.println("REVERSE INTAKE SLOW \n\n\n");
 }
 
 public void stopIntake(){
-    intakeLeft.set(0);
-    intakeRight.set(0);
+    intakeTop.set(0);
+    intakeBot.set(0);
 }
 
 
