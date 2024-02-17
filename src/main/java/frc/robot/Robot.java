@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -27,10 +28,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  private NetworkTable limelightTable;
-  private static final double TAG_WIDTH_INCHES = 6.5;
-  private static final double HORIZONTAL_FOV = 63.3;
-  private static final double FOCAL_LENGTH = 17.5;
+  limelightData aprilData = new limelightData();
 
   public static CTREConfigs ctreConfigs;
 
@@ -51,10 +49,18 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    // Make sure you only configure port forwarding once in your robot code.
+    // Do not place these function calls in any periodic functions
+    for (int port = 5800; port <= 5807; port++) {
+      PortForwarder.add(port, "limelight.local", port);
+    }
+
+
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
-    limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+  
     //rumbleTimer.start();
     
     

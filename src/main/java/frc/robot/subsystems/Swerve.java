@@ -56,7 +56,7 @@ public class Swerve extends SubsystemBase {
             this::getSpeeds,
             this::driveRobotRelative,
             new HolonomicPathFollowerConfig(                     
-                    new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                    new PIDConstants(0.05, 0.0, 0.0), // Translation PID constants
                     new PIDConstants(0.05, 0.0, 0.0), // Rotation PID constants
                     4.5, // Max module speed, in m/s
                     0.4, // Drive base radius in meters. Distance from robot center to furthest module.
@@ -233,7 +233,7 @@ public void resetModulesToAbsolute(){
                 this::getSpeeds,
                 this::driveRobotRelative,
                 new HolonomicPathFollowerConfig(                     
-                    new PIDConstants(5.0, 0.0, 0.0), // Translation PID constants
+                    new PIDConstants(0.05, 0.0, 0.0), // Translation PID constants
                     new PIDConstants(0.05, 0.0, 0.0), // Rotation PID constants
                     4.5, // Max module speed, in m/s
                     0.4, // Drive base radius in meters. Distance from robot center to furthest module.

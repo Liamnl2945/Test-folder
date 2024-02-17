@@ -25,7 +25,8 @@ public class TeleopSwerve extends Command {
 
    
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier speedSup, BooleanSupplier aiming) {
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, 
+    DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier speedSup, BooleanSupplier aiming, double d) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -48,9 +49,9 @@ public class TeleopSwerve extends Command {
 
         if (isAiming) {
             // Use determined values
-            translationVal = limelightData.XC;
-            strafeVal = limelightData.YC;
-            rotationVal = limelightData.ZC;
+            translationVal = limelightData.needTranslate;
+            strafeVal = limelightData.needStrafe;
+            rotationVal = limelightData.needRotate;
         } else {
             // Use joystick inputs with deadband applied
             translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
