@@ -2,6 +2,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.hardware.TalonFX;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants;
 
@@ -9,6 +12,8 @@ public class Shooter extends SubsystemBase {
     
     private final TalonFX ShooterLeft = new TalonFX(constants.Shooter.ShooterLeft);
     private final TalonFX ShooterRight = new TalonFX(constants.Shooter.ShooterRigth);
+    NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
+
     
 
     public Shooter(){
@@ -39,6 +44,16 @@ public class Shooter extends SubsystemBase {
         ShooterLeft.set(0);
         ShooterRight.set(0);
     }
+    
+    public int getDetectedAprilTagID() {
+        return limelightTable.getEntry("apriltag_id").getNumber(0).intValue();
+    }
+
+    public void runShooterAtSpeed(double speed) {
+        ShooterLeft.set(speed);
+        ShooterRight.set(speed);
+    }
+    
     
 
     
