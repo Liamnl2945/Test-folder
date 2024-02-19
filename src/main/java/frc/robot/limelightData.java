@@ -18,10 +18,13 @@ public class limelightData {
         public static double targetPitch;
         public static double targetYaw;
 
-    
+        private boolean calculating = true;
 
+    public void calculate() {
+        if (!calculating) {
+            return;
+        }
 
-    public void calculate(){
         needStrafe = 0;
         needTranslate = 0;
 
@@ -38,17 +41,20 @@ public class limelightData {
         //double targetRoll = targetPose[3];
         //double targetPitch = targetPose[4];
         //double targetYaw = targetPose[5]; 
-        if(!(targetX < 1)){
+
+        if(!(targetX > 1)){
             needRotate = targetX;
+        }
+        else{ 
+            needRotate = 0.0;
         }
 
        System.out.println(Math.sqrt((XC*XC)+(YC*YC)+(ZC*ZC)));
        // System.out.println("Roll: " + targetRoll + "   Pitch: " + targetPitch + "   Yaw: " + targetYaw);
         //System.out.println("X: " + targetXC + "   Y: " + targetYC + "   Z: " + targetZC);
         //System.out.println("Distance to Tag: " + distance);
-
-
-
-
+    }
+    public void stopCalculating() {
+        this.calculating = false;
     }
 }

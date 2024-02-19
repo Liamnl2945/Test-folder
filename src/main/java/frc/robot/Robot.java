@@ -156,6 +156,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     endRumbleTask();
+    aprilData.stopCalculating(); 
   }
 
   /** This function is called periodically when disabled. */
