@@ -1,26 +1,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 
-import com.fasterxml.jackson.databind.util.Named;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.path.PathPlannerPath;
-
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.RotationLocker.RotationSource;
-import frc.robot.RotationLocker.AprilTagPointLock;
-import frc.robot.RotationLocker.JoystickLock;
 import frc.robot.commands.Intake_Indexer;
 import frc.robot.commands.SetShooterSpeedByAprilTag;
 import frc.robot.commands.TeleopSwerve;
@@ -110,7 +99,7 @@ public class RobotContainer {
   public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kB.value);
   public final JoystickButton aim = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
   public final JoystickButton ShootLimeLight = new JoystickButton(manipulator, XboxController.Button.kA.value);
-  private RotationSource hijackableRotation = new JoystickLock(); // get rotation from driver input;
+  //private RotationSource hijackableRotation = new JoystickLock(); // get rotation from driver input;
 
   
 
@@ -122,10 +111,10 @@ public class RobotContainer {
 
     
     public RobotContainer(){
-
+      System.out.println("Container Created");
       
       // Register Named Commands
-        NamedCommands.registerCommand("autoBalance", s_Swerve.ExamplePath());
+       // NamedCommands.registerCommand("autoBalance", s_Swerve.ExamplePath());
         
 
 
@@ -140,25 +129,22 @@ public class RobotContainer {
                 () -> aim.getAsBoolean()
             ) 
         );
+              System.out.println("swerve initialized");
+
         
 
       // Build an auto chooser. This will use Commands.none() as the default option.
       autoChooser = AutoBuilder.buildAutoChooser();
 
       SmartDashboard.putData("Auto Chooser", autoChooser);
-
-
       configureButtonBindings();
       configureDefaultCommands();
+            System.out.println("Buttons configured");
 
-      
+
     //limelightTab = Shuffleboard.getTab("Limelight Tab");
     //L_Limelight.configLimelightTab(limelightTab);
     //L_Limelight.getShuffleboardValues();
-    
-      
-
-      
     }
     
 
@@ -171,6 +157,8 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
      private void configureButtonBindings() {
+            System.out.println("Configuring Buttons");
+
         /* Driver BUTTons */
 
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
@@ -215,7 +203,7 @@ public class RobotContainer {
      public Command getAutonomousCommand() {
 
       // Load the path you want to follow using its name in the GUI
-        PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
+        //PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
 
       // Create a path following command using AutoBuilder. This will also trigger event markers.
 

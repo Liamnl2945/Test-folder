@@ -39,10 +39,10 @@ public class limelightData {
         targetXOffset = limelightTable.getEntry("tx").getDouble(0.0);
         targetYOffset = limelightTable.getEntry("ty").getDouble(0.0);
         targetArea = limelightTable.getEntry("ta").getDouble(0.0);
-        double tagID = limelightTable.getEntry("tid").getDouble(0.0);
-        double XC = targetPose[0];
-        double YC = targetPose[1];
-        double ZC = targetPose[2];
+        tagID = limelightTable.getEntry("tid").getDouble(0.0);
+        XC = targetPose[0];
+        YC = targetPose[1];
+        ZC = targetPose[2];
         //double targetRoll = targetPose[3];
         //double targetPitch = targetPose[4];
 

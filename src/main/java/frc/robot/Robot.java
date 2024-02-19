@@ -7,11 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.net.PortForwarder;
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -34,16 +31,9 @@ public class Robot extends TimedRobot {
 
   public static CTREConfigs ctreConfigs;
 
-
-
   public ShuffleboardTab limelightTab;
 
   Timer  rumbleTimer = new Timer();
-
-
-  
-
-  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -51,6 +41,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    RobotContainer container = new RobotContainer();
 
     // Make sure you only configure port forwarding once in your robot code.
     // Do not place these function calls in any periodic functions
@@ -102,8 +93,6 @@ public class Robot extends TimedRobot {
       endRumbleTask();
       rumbleTimer.reset();
     }*/
-    
-
      CommandScheduler.getInstance().run();
   }
 
