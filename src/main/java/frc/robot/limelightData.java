@@ -17,6 +17,12 @@ public class limelightData {
         public static double targetRoll;
         public static double targetPitch;
         public static double targetYaw;
+        public static double tagID;
+        public static boolean targetValid;
+        public static double targetXOffset;
+        public static double targetYOffset;
+        public static double targetArea;
+
 
     
 
@@ -27,20 +33,19 @@ public class limelightData {
 
         double[] targetPose = limelightTable.getEntry("targetpose_cameraspace").getDoubleArray(new double[6]);
 
-        double targetX = limelightTable.getEntry("tx").getDouble(0.0);
-        //double targetY = limelightTable.getEntry("ty").getDouble(0.0);
-        //double targetA = limelightTable.getEntry("ta").getDouble(0.0);
-        //double targetS = limelightTable.getEntry("ts").getDouble(0.0);
-
+        targetXOffset = limelightTable.getEntry("tx").getDouble(0.0);
+        targetYOffset = limelightTable.getEntry("ty").getDouble(0.0);
+        targetArea = limelightTable.getEntry("ta").getDouble(0.0);
+        double tagID = limelightTable.getEntry("tid").getDouble(0.0);
         double XC = targetPose[0];
         double YC = targetPose[1];
         double ZC = targetPose[2];
         //double targetRoll = targetPose[3];
         //double targetPitch = targetPose[4];
-        //double targetYaw = targetPose[5]; 
-        if(!(targetX < 1)){
-            needRotate = targetX;
-        }
+        //double targetYaw = targetPose[5];
+
+
+        targetValid = tagID == 0 ? true : false;
 
        System.out.println(Math.sqrt((XC*XC)+(YC*YC)+(ZC*ZC)));
        // System.out.println("Roll: " + targetRoll + "   Pitch: " + targetPitch + "   Yaw: " + targetYaw);

@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RotationLocker.RotationSource;
-import frc.robot.RotationLocker.AprilTagLock;
+import frc.robot.RotationLocker.AprilTagPointLock;
 import frc.robot.RotationLocker.JoystickLock;
 import frc.robot.commands.Intake_Indexer;
 import frc.robot.commands.SetShooterSpeedByAprilTag;

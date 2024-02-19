@@ -12,7 +12,6 @@ public class JoystickLock implements RotationSource {
     
     @Override
     public double getR() {
-        
         return -MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
     }
 }
