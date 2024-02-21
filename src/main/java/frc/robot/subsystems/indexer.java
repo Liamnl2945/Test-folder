@@ -13,7 +13,7 @@ public class indexer extends SubsystemBase {
     private final WPI_TalonSRX indexerLeft = new WPI_TalonSRX(constants.indexer.indexerLeft);
     public final DigitalInput limitSwitchRight = new DigitalInput(constants.indexer.limitSwitchRightPort);
     public final DigitalInput limitSwitchLeft = new DigitalInput(constants.indexer.limitSwitchLeftPort);
-    private final double speed = 0.4;
+    private final double speed = 0.6;
 
 public indexer(){
     indexerRight.configFactoryDefault();
@@ -28,7 +28,7 @@ public indexer(){
 
 public void runIndexer() {
     if (limitSwitchLeft.get() || limitSwitchRight.get()) {  // Check if top limit switch is not pressed
-        indexerRight.set(speed);
+        indexerRight.set(-speed);
         indexerLeft.set(speed);
         System.out.println("RUN INDEXER \n\n\n");
     } else {

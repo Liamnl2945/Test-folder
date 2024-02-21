@@ -14,28 +14,29 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
     @Override
     public void execute() {
         int detectedTagID = shooter.getDetectedAprilTagID();
-        double speed;
+        double speed  = 0;
         System.out.println("SHOOTER INITALIZED");
-
-        switch (detectedTagID) {
-            case 6:  // Adjust speed for BLUE AMP 
-                speed = 0.175;  // Example speed for Tag 1
-                System.out.println("\n\n BLUE AMP DETECTED");
-                break;
-            case 7:  // Adjust speed for BLUE SPEAKER
-                speed = 1.0;   // Example speed for Tag 2
-                System.out.println("\n\n BLUE Speaker DETECTED");
-                break;
-            case 5:  // Adjust speed for RED AMP
-                speed = 0.175;  // Example speed for Tag 1
-                System.out.println("\n\n RED AMP DETECTED");
-                break;
-            case 4:  // Adjust speed for RED SPEAKER
-                speed = 1.0;   // Example speed for Tag 2
-                System.out.println("\n\n RED Speaker DETECTED");
-                break;
-            default:
-                speed = 0.0;   // Stop shooter if no tag detected
+        if(TeleopSwerve.isAiming){
+            switch (detectedTagID) {
+                case 6:  // Adjust speed for BLUE AMP 
+                    speed = 0.175;  // Example speed for Tag 1
+                    //System.out.println("\n\n BLUE AMP DETECTED");
+                    break;
+                case 7:  // Adjust speed for BLUE SPEAKER
+                    speed = 1.0;   // Example speed for Tag 2
+                    //System.out.println("\n\n BLUE Speaker DETECTED");
+                    break;
+                case 5:  // Adjust speed for RED AMP
+                    speed = 0.175;  // Example speed for Tag 1
+                   //System.out.println("\n\n RED AMP DETECTED");
+                    break;
+                case 4:  // Adjust speed for RED SPEAKER
+                    speed = 1.0;   // Example speed for Tag 2
+                    //System.out.println("\n\n RED Speaker DETECTED");
+                    break;
+                default:
+                    speed = 0.5;   // defualt speed, even if no tag detected it will spin up when the aim is pressed
+            }
         }
         shooter.runShooterAtSpeed(speed);
     }

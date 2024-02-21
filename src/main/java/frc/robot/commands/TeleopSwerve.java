@@ -32,7 +32,7 @@ public class TeleopSwerve extends Command {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
-    private boolean isAiming;
+    public static boolean isAiming;
     private double translationVal;
     private double strafeVal;
     private double rotationVal;
@@ -49,7 +49,7 @@ public class TeleopSwerve extends Command {
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
-        this.isAiming = aiming.getAsBoolean();
+        isAiming = aiming.getAsBoolean();
 
         
         gyro = new Pigeon2(constants.Swerve.pigeonID);

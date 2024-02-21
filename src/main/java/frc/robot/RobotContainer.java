@@ -94,11 +94,11 @@ public class RobotContainer {
 
   //shooter
 
-  public final JoystickButton shooterRun = new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value);
-  public final JoystickButton shooterReverse = new JoystickButton(manipulator, XboxController.Button.kX.value);
-  public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kB.value);
+  public final JoystickButton shooterRun = new JoystickButton(manipulator, XboxController.Button.kA.value);
+  public final JoystickButton shooterReverse = new JoystickButton(manipulator, XboxController.Button.kB.value);
+  public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kX.value);
   public final JoystickButton aim = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
-  public final JoystickButton ShootLimeLight = new JoystickButton(manipulator, XboxController.Button.kA.value);
+  public final JoystickButton ShootLimeLight = new JoystickButton(manipulator, XboxController.Button.kY.value);
   //private RotationSource hijackableRotation = new JoystickLock(); // get rotation from driver input;
 
   

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Intake extends SubsystemBase{
     private final WPI_TalonSRX intakeTop = new WPI_TalonSRX(constants.Intake.intakeTop);
     private final WPI_TalonSRX intakeBot = new WPI_TalonSRX(constants.Intake.intakeBot);
-    private final double speed = 0.8;
+    private final double speed = 1.0;
 
 public Intake(){
     intakeTop.configFactoryDefault();
