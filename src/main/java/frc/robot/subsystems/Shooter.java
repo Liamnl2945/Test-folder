@@ -13,7 +13,6 @@ public class Shooter extends SubsystemBase {
     private final TalonFX ShooterLeft = new TalonFX(constants.Shooter.ShooterLeft);
     private final TalonFX ShooterRight = new TalonFX(constants.Shooter.ShooterRigth);
     NetworkTable limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-
     
 
     public Shooter(){
@@ -23,13 +22,13 @@ public class Shooter extends SubsystemBase {
         ShooterLeft.setNeutralMode(NeutralModeValue.Coast);
     }
 
-    public void runShooter() {
-        ShooterLeft.set(1.0);
-        ShooterRight.set(1.0);
+   // public void runShooter() {
+      //  ShooterLeft.set(speed);
+        //ShooterRight.set(speed);
         //ShooterLeft.setVoltage(12.0);
         //ShooterRight.setVoltage(12.0);
-        System.out.println("\n\nShooter motor left speed " + ShooterLeft.get() + " Shooter motor Right speed  " + ShooterRight.get() );
-    }
+       // System.out.println("\n\nShooter motor left speed " + ShooterLeft.get() + " Shooter motor Right speed  " + ShooterRight.get() );
+   // }
     public void slowShoot(){
         System.out.println("SHOOTER");
         ShooterLeft.set(0.175);
