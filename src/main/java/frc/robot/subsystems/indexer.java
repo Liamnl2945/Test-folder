@@ -20,14 +20,14 @@ public indexer(){
     indexerLeft.configFactoryDefault();
 
     indexerRight.setInverted(true);
-    indexerLeft.setInverted(false);
+    indexerLeft.setInverted(true);
     
     indexerRight.setNeutralMode(NeutralMode.Brake);
     indexerLeft.setNeutralMode(NeutralMode.Brake);
 }
 
 public void runIndexer() {
-    if (!limitSwitchLeft.get() || !limitSwitchRight.get()) {  // Check if top limit switch is not pressed
+    if (limitSwitchLeft.get() || limitSwitchRight.get()) {  // Check if top limit switch is not pressed
         indexerRight.set(speed);
         indexerLeft.set(speed);
         System.out.println("RUN INDEXER \n\n\n");

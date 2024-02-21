@@ -32,7 +32,6 @@ public class climberCom extends Command{
             climbLeft = 0;
         }
     
-        
         Climber.climbUpLeft(climbLeft);
         Climber.climbUpRight(climbRight);
 

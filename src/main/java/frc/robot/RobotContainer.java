@@ -58,7 +58,7 @@ public class RobotContainer {
         // Xbox Controller - 2/Operator - Port 1
         // ----------------------------------------------------------
         // Left Trigger -
-        // Right Trigger -
+        // Right Trigger - April Tag lock on
         // Left Bumper
         // Button A - Normal Shoot
         // Button B - Slow Shoot
@@ -111,7 +111,6 @@ public class RobotContainer {
 
     
     public RobotContainer(){
-      System.out.println("Container Created");
       
       // Register Named Commands
        // NamedCommands.registerCommand("autoBalance", s_Swerve.ExamplePath());
@@ -129,7 +128,6 @@ public class RobotContainer {
                 () -> aim.getAsBoolean()
             ) 
         );
-              System.out.println("swerve initialized");
 
         
 
@@ -139,7 +137,6 @@ public class RobotContainer {
       SmartDashboard.putData("Auto Chooser", autoChooser);
       configureButtonBindings();
       configureDefaultCommands();
-            System.out.println("Buttons configured");
 
 
     //limelightTab = Shuffleboard.getTab("Limelight Tab");
