@@ -9,6 +9,7 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
     public SetShooterSpeedByAprilTag(Shooter shooter) {
         this.addRequirements(shooter);
         this.shooter = shooter;
+        
     }
 
     @Override
