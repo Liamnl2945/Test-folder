@@ -28,8 +28,11 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   limelightData aprilData = new limelightData();
+  private RobotContainer m_robotContainer;
 
   public static CTREConfigs ctreConfigs;
+
+
 
   public ShuffleboardTab limelightTab;
 
@@ -41,7 +44,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    RobotContainer container = new RobotContainer();
+     ctreConfigs = new CTREConfigs();   
+     m_robotContainer = new RobotContainer();
 
     // Make sure you only configure port forwarding once in your robot code.
     // Do not place these function calls in any periodic functions
@@ -60,7 +64,7 @@ public class Robot extends TimedRobot {
     //rumbleTimer.start();
     
     
-    ctreConfigs = new CTREConfigs();   
+ 
 
     
     
@@ -144,8 +148,7 @@ public class Robot extends TimedRobot {
   /** This function is called once when the robot is disabled. */
   @Override
   public void disabledInit() {
-    endRumbleTask();
-    aprilData.stopCalculating(); 
+    endRumbleTask(); 
   }
 
   /** This function is called periodically when disabled. */

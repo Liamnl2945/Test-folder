@@ -18,18 +18,13 @@ public class limelightData {
         public static double targetPitch;
         public static double targetYaw;
         public static double tagID;
-        public static boolean targetValid;
         public static double targetXOffset;
         public static double targetYOffset;
         public static double targetArea;
-
-
-        private boolean calculating = true;
+        public static boolean targetValid;
 
     public void calculate() {
-        if (!calculating) {
-            return;
-        }
+
 
         needStrafe = 0;
         needTranslate = 0;
@@ -45,14 +40,17 @@ public class limelightData {
         ZC = targetPose[2];
         //double targetRoll = targetPose[3];
         //double targetPitch = targetPose[4];
+        
+        if(tagID == 4 || tagID == 5 ||tagID == 6 ||tagID == 7){
+            targetValid = true;
+        }
+        else{
+            targetValid = false; ;  
+        }
 
-
-       System.out.println(Math.sqrt((XC*XC)+(YC*YC)+(ZC*ZC)));
+      // System.out.println(Math.sqrt((XC*XC)+(YC*YC)+(ZC*ZC)));
        // System.out.println("Roll: " + targetRoll + "   Pitch: " + targetPitch + "   Yaw: " + targetYaw);
         //System.out.println("X: " + targetXC + "   Y: " + targetYC + "   Z: " + targetZC);
         //System.out.println("Distance to Tag: " + distance);
-    }
-    public void stopCalculating() {
-        this.calculating = false;
     }
 }

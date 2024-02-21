@@ -16,8 +16,13 @@ public class AprilTagPointLock implements RotationSource {
     @Override
     public double getR() {
         double calculatedValue = rotationPID.calculate(limelightData.targetXOffset);
-        //System.out.println(" \n \n AprilTagLock calculated value: " + calculatedValue );
-        //System.err.println("\n \n ROTATION LOCKING ONNNN!!!!! ");
         return calculatedValue;
+    }
+
+    
+    @Override
+    public double getRd(double degrees) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getRd'");
     }
 }

@@ -47,7 +47,7 @@ public class Shooter extends SubsystemBase {
     }
     
     public int getDetectedAprilTagID() {
-        return limelightTable.getEntry("apriltag_id").getNumber(0).intValue();
+        return limelightTable.getEntry("tid").getNumber(0).intValue();
     }
 
     public void runShooterAtSpeed(double speed) {

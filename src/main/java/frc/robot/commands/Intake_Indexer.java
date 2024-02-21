@@ -31,7 +31,7 @@ public class Intake_Indexer extends Command {
     } else {
         // Stop the indexer if any limit switch is activated
         //System.out.println("LIMIT SWITCH ACTIVE");
-        indexer.stopIndexer();
+        //indexer.stopIndexer();
     }
         if(intakeStick.getPOV() == 0 || intakeStick.getPOV() == 45 || intakeStick.getPOV() == 315){
             intake.runIntake();

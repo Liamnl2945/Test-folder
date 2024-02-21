@@ -7,11 +7,12 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
     private final Shooter shooter;
 
     public SetShooterSpeedByAprilTag(Shooter shooter) {
+        this.addRequirements(shooter);
         this.shooter = shooter;
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
         int detectedTagID = shooter.getDetectedAprilTagID();
         double speed;
         System.out.println("SHOOTER INITALIZED");
@@ -36,7 +37,6 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
             default:
                 speed = 0.0;   // Stop shooter if no tag detected
         }
-
         shooter.runShooterAtSpeed(speed);
     }
 }
