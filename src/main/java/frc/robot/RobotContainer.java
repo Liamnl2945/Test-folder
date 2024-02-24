@@ -79,9 +79,12 @@ public class RobotContainer {
 
   /* Driver Buttons */
   private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-  private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-  private final JoystickButton speedThrottle = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
- 
+  private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kX.value);
+  public final static JoystickButton aim = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+  public final static JoystickButton slowMove = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
+  
+
 
   //intake
   //public final JoystickButton intakeIn = new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value);
@@ -94,10 +97,9 @@ public class RobotContainer {
 
   //shooter
 
-  public final JoystickButton shooterRun = new JoystickButton(manipulator, XboxController.Button.kA.value);
+  //public final JoystickButton shooterRun = new JoystickButton(manipulator, XboxController.Button.kA.value);
   public final JoystickButton shooterReverse = new JoystickButton(manipulator, XboxController.Button.kB.value);
   public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kX.value);
-  public final JoystickButton aim = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
   public final JoystickButton ShootLimeLight = new JoystickButton(manipulator, XboxController.Button.kY.value);
   //private RotationSource hijackableRotation = new JoystickLock(); // get rotation from driver input;
 
@@ -105,7 +107,7 @@ public class RobotContainer {
 
     
   //one button code
-  private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,manipulator);
+  private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,driver);
   private final climberCom climberCommand = new climberCom(C_Climber, manipulator);
   private final SetShooterSpeedByAprilTag ShooterAprilTags = new SetShooterSpeedByAprilTag(S_Shooter);
 
@@ -124,7 +126,6 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(),
-                () -> speedThrottle.getAsBoolean(),
                 () -> aim.getAsBoolean()
             ) 
         );
@@ -132,9 +133,9 @@ public class RobotContainer {
         
 
       // Build an auto chooser. This will use Commands.none() as the default option.
-      autoChooser = AutoBuilder.buildAutoChooser();
+      //autoChooser = AutoBuilder.buildAutoChooser();
 
-      SmartDashboard.putData("Auto Chooser", autoChooser);
+      //SmartDashboard.putData("Auto Chooser", autoChooser);
       configureButtonBindings();
       configureDefaultCommands();
 
@@ -177,8 +178,8 @@ public class RobotContainer {
           //indexerOut.onFalse(new InstantCommand(()-> I_Indexer.stopIndexer())); 
 
           /* shooter */
-          shooterRun.onTrue(new InstantCommand(() -> S_Shooter.runShooter()));
-          shooterRun.onFalse(new InstantCommand(()-> S_Shooter.stopShooter()));
+          //shooterRun.onTrue(new InstantCommand(() -> S_Shooter.runShooter()));
+          //shooterRun.onFalse(new InstantCommand(()-> S_Shooter.stopShooter()));
           shooterReverse.onTrue(new InstantCommand(() -> S_Shooter.reverseShooter()));
           shooterReverse.onFalse(new InstantCommand(()-> S_Shooter.stopShooter()));
           slowShoot.onTrue(new InstantCommand(()-> S_Shooter.slowShoot()));
@@ -205,5 +206,6 @@ public class RobotContainer {
       // Create a path following command using AutoBuilder. This will also trigger event markers.
 
         return autoChooser.getSelected();
+        return m_autoSelected.m_chooser;
     }
 }

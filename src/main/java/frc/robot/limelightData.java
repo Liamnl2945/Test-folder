@@ -29,7 +29,7 @@ public class limelightData {
         needStrafe = 0;
         needTranslate = 0;
 
-        double[] targetPose = limelightTable.getEntry("targetpose_cameraspace").getDoubleArray(new double[6]);
+        double[] targetPose = limelightTable.getEntry("targetpose_robotspace").getDoubleArray(new double[6]);
 
         targetXOffset = limelightTable.getEntry("tx").getDouble(0.0);
         targetYOffset = limelightTable.getEntry("ty").getDouble(0.0);
@@ -38,6 +38,9 @@ public class limelightData {
         XC = targetPose[0];
         YC = targetPose[1];
         ZC = targetPose[2];
+        targetYaw = targetPose[5];
+        //System.out.println(limelightData.targetYaw);
+
         //double targetRoll = targetPose[3];
         //double targetPitch = targetPose[4];
         

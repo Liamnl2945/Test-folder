@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Shooter;
 
 public class SetShooterSpeedByAprilTag extends InstantCommand {
@@ -9,16 +10,15 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
     public SetShooterSpeedByAprilTag(Shooter shooter) {
         this.addRequirements(shooter);
         this.shooter = shooter;
-        
     }
-
     @Override
     public void execute() {
         int detectedTagID = shooter.getDetectedAprilTagID();
         double speed  = 0;
-        System.out.println("SHOOTER INITALIZED");
-        if(TeleopSwerve.isAiming){
-            switch (detectedTagID) {
+       // System.out.println("SHOOTER INITALIZED");
+        if(RobotContainer.aim.getAsBoolean()){
+            //System.out.println("SHOOTER SEES AIM");
+            switch (detectedTagID){
                 case 6:  // Adjust speed for BLUE AMP 
                     speed = 0.175;  // Example speed for Tag 1
                     //System.out.println("\n\n BLUE AMP DETECTED");
@@ -36,10 +36,12 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
                     //System.out.println("\n\n RED Speaker DETECTED");
                     break;
                 default:
-                    speed = 0.5;   // defualt speed, even if no tag detected it will spin up when the aim is pressed
+                    speed = 0.5;   // defualt speed, even if no tag is detected it will spin up when the aim is pressed
             }
         }
-        shooter.runShooterAtSpeed(speed);
+        shooter.runShooterAtSpeed(0);
+        //shooter.runShooterAtSpeed(0);
+
     }
 }
 

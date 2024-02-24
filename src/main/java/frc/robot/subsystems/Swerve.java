@@ -222,7 +222,7 @@ public void resetModulesToAbsolute(){
 
     public Command ExamplePath() {
 
-        PathPlannerPath path = PathPlannerPath.fromPathFile("Example Path");
+        PathPlannerPath path = PathPlannerPath.fromPathFile("ExamplePath");
 
         return new FollowPathHolonomic(
                 path,

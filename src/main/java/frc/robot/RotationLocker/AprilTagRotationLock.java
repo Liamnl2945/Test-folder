@@ -1,13 +1,7 @@
 package frc.robot.RotationLocker;
 
-import com.ctre.phoenix6.configs.Pigeon2Configuration;
-import com.ctre.phoenix6.hardware.Pigeon2;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Rotation2d;
-import frc.robot.constants;
 import frc.robot.limelightData;
-import frc.robot.subsystems.Swerve;
 
 
 
@@ -21,7 +15,7 @@ public class AprilTagRotationLock implements RotationSource {
 
         
 
-        PIDController pid = new PIDController(.01, .02, .001);
+        PIDController pid = new PIDController(0.0015, 0.0015, 0.00015);
         pid.setTolerance(.25); // allowable angle error
         pid.enableContinuousInput(0, 360); // it is faster to go 1 degree from 359 to 0 instead of 359 degrees
         pid.setSetpoint(0); // 0 = apriltag angle/offset
@@ -30,7 +24,7 @@ public class AprilTagRotationLock implements RotationSource {
 
     @Override
     public double getRd(double degreesOffset) {
-        double calculatedValue = rotationPID.calculate(limelightData.targetYaw - degreesOffset);
+        double calculatedValue = rotationPID.calculate(degreesOffset);
         return calculatedValue;
     }
 
