@@ -2,8 +2,8 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.constants;
-
-
+import frc.robot.commands.SetShooterSpeedByAprilTag;
+import frc.robot.commands.TeleopSwerve;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -16,6 +16,7 @@ import com.pathplanner.lib.commands.FollowPathHolonomic;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.PathPlannerLogging;
 import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -25,17 +26,27 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+
 
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
+
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
+
+    //private Field2d field = new Field2d();
 
     public Swerve() {
         gyro = new Pigeon2(constants.Swerve.pigeonID);
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.setYaw(0);
+
+        
 
 
         mSwerveMods = new SwerveModule[] {
@@ -52,13 +63,8 @@ public class Swerve extends SubsystemBase {
             this::resetPose,
             this::getSpeeds,
             this::driveRobotRelative,
-            new HolonomicPathFollowerConfig(                     
-                    new PIDConstants(0.05, 0.0, 0.0), // Translation PID constants
-                    new PIDConstants(0.05, 0.0, 0.0), // Rotation PID constants
-                    4.5, // Max module speed, in m/s
-                    0.4, // Drive base radius in meters. Distance from robot center to furthest module.
-                    new ReplanningConfig() // Default path replanning config. See the API for the options here
-             ), // Adjust config values as needed
+            constants.Swerve.pathFollowerConfig,
+             // Adjust config values as needed
             () -> { // Boolean supplier that controls when the path will be mirrored for the red alliance
               // This will flip the path being followed to the red side of the field.
               // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
@@ -70,7 +76,13 @@ public class Swerve extends SubsystemBase {
               return false;
              }, // Mirroring logic for red alliance
             this
+            
         );
+
+        // Set up custom logging to add the current path to a field 2d widget
+       // PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
+
+        //SmartDashboard.putData("Field", field);
     }
 
    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -198,11 +210,55 @@ public void resetModulesToAbsolute(){
     
 
     public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
-        SwerveModuleState[] moduleStates = 
-            constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
-        // ... rest of your drive logic ...
+        ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
+
+        SwerveModuleState[] targetStates = constants.Swerve.swerveKinematics.toSwerveModuleStates(targetSpeeds);
+        setStates(targetStates);
+
+        
     }
+
+    public void setStates(SwerveModuleState[] targetStates) {
+        SwerveDriveKinematics.desaturateWheelSpeeds(targetStates, constants.Swerve.maxSpeed);
     
+        for (int i = 0; i < mSwerveMods.length; i++) {
+            mSwerveMods[i].setDesiredState(targetStates[i], false);
+        }
+      }
+
+     
+    
+      public SwerveModulePosition[] getPositions() {
+        SwerveModulePosition[] positions = new SwerveModulePosition[mSwerveMods.length];
+        for (int i = 0; i < mSwerveMods.length; i++) {
+          positions[i] = mSwerveMods[i].getPosition();
+        }
+        return positions;
+      }
+    
+    
+      class SimSwerveModule {
+        private SwerveModulePosition currentPosition = new SwerveModulePosition();
+        private SwerveModuleState currentState = new SwerveModuleState();
+    
+        public SwerveModulePosition getPosition() {
+          return currentPosition;
+        }
+    
+        public SwerveModuleState getState() {
+          return currentState;
+        }
+    
+        public void setTargetState(SwerveModuleState targetState) {
+          // Optimize the state
+          currentState = SwerveModuleState.optimize(targetState, currentState.angle);
+    
+          currentPosition = new SwerveModulePosition(currentPosition.distanceMeters + (currentState.speedMetersPerSecond * 0.02), currentState.angle);
+        }
+      }
+
+
+      
     
 
     
@@ -218,37 +274,8 @@ public void resetModulesToAbsolute(){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
+        //field.setRobotPose(getPose());
     }
 
-    public Command ExamplePath() {
-
-        PathPlannerPath path = PathPlannerPath.fromPathFile("ExamplePath");
-
-        return new FollowPathHolonomic(
-                path,
-                this::getPose,
-                this::getSpeeds,
-                this::driveRobotRelative,
-                new HolonomicPathFollowerConfig(                     
-                    new PIDConstants(0.05, 0.0, 0.0), // Translation PID constants
-                    new PIDConstants(0.05, 0.0, 0.0), // Rotation PID constants
-                    4.5, // Max module speed, in m/s
-                    0.4, // Drive base radius in meters. Distance from robot center to furthest module.
-                    new ReplanningConfig() // Default path replanning config. See the API for the options here
-                ),
-            () -> {
-                    // Boolean supplier that controls when the path will be mirrored for the red alliance
-                    // This will flip the path being followed to the red side of the field.
-                    // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
-
-                    var alliance = DriverStation.getAlliance();
-                    if (alliance.isPresent()) {
-                        return alliance.get() == DriverStation.Alliance.Red;
-                    }
-                    return false;
-                },
-                this // Reference to this subsystem to set requirements
-        );
-
-    }
+    
 }

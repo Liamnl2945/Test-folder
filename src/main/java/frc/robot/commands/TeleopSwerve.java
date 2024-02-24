@@ -44,7 +44,8 @@ public class TeleopSwerve extends Command {
 
 
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier aiming) {
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, 
+        BooleanSupplier robotCentricSup, BooleanSupplier aiming) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -62,7 +63,10 @@ public class TeleopSwerve extends Command {
         gyro.setYaw(0);
 
         
+
+        
     }
+    
     
     @Override
     public void execute() {
@@ -92,14 +96,14 @@ public class TeleopSwerve extends Command {
                     rotationPIDAprilTagRotationLock = new AprilTagRotationLock();
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);                    
-                    rotationVal = rotationPIDAprilTagRotationLock.getRd(setpoint + gyro.getYaw().getValue());
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), constants.stickDeadband);
                     
                 }
                 else{
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);                    
-                    rotationVal = rotationPIDAprilTagRotationLock.getRd(setpoint + gyro.getYaw().getValue());
-                    System.out.println(gyro.getYaw().getValue());
+                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), constants.stickDeadband);
+                    //System.out.println(gyro.getYaw().getValue());
                 }
             }
         } else {

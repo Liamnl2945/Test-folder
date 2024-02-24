@@ -18,8 +18,8 @@ public Intake(){
     intakeTop.configFactoryDefault();
     intakeBot.configFactoryDefault();
 
-    intakeTop.setInverted(false);
-    intakeBot.setInverted(false);
+    intakeTop.setInverted(true);
+    intakeBot.setInverted(true);
     
     intakeTop.setNeutralMode(NeutralMode.Brake);
     intakeBot.setNeutralMode(NeutralMode.Brake);

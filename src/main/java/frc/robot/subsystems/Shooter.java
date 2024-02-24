@@ -53,6 +53,10 @@ public class Shooter extends SubsystemBase {
         ShooterLeft.set(speed);
         ShooterRight.set(speed);
     }
+    public void AutorunShooter() {
+        ShooterLeft.set(1.0);
+        ShooterRight.set(1.0);
+   }
     
     
 

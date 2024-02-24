@@ -2,6 +2,9 @@ package frc.robot;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
+import com.pathplanner.lib.util.PIDConstants;
+import com.pathplanner.lib.util.ReplanningConfig;
 import com.ctre.phoenix6.signals.InvertedValue;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -111,7 +114,7 @@ public class constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static double  maxSpeed = 4.5; //TODO: This must be tuned to specific robot
         /** Radians per Second */
         public static double maxAngularVelocity = 12; //TODO: This must be tuned to specific robot
 
@@ -169,8 +172,18 @@ public class constants {
 
         public void setDrivesMode(NeutralModeValue brake) {
         }
+
+        public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
+      new PIDConstants(5.0, 0, 0), // Translation constants 
+      new PIDConstants(5.0, 0, 0), // Rotation constants 
+      maxSpeed, 
+      0.43, // Drive base radius (distance from center to furthest module) 
+      new ReplanningConfig()
+    );
         
     }
+     
+  
 
 
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot

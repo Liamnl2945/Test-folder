@@ -39,7 +39,7 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
                     speed = 0.5;   // defualt speed, even if no tag is detected it will spin up when the aim is pressed
             }
         }
-        shooter.runShooterAtSpeed(0);
+        shooter.runShooterAtSpeed(speed);
         //shooter.runShooterAtSpeed(0);
 
     }
