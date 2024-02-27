@@ -157,6 +157,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     endRumbleTask(); 
+    
   }
 
   /** This function is called periodically when disabled. */
