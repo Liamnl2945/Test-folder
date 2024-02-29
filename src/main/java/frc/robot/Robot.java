@@ -124,6 +124,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    aprilData.calculate();
     //switch (m_autoSelected) {
       //case kCustomAuto:
       //  // Put custom auto code here  

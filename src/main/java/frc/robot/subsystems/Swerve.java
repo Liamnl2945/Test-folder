@@ -68,7 +68,7 @@ public class Swerve extends SubsystemBase {
             () -> { // Boolean supplier that controls when the path will be mirrored for the red alliance
               // This will flip the path being followed to the red side of the field.
               // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
-              return false;
+              return true;
              }, // Mirroring logic for red alliance
             this
             
@@ -147,7 +147,7 @@ public void zeroHeading(){
 }
 
 public Rotation2d   getGyroYaw() {
-    return Rotation2d.fromDegrees(gyro.getYaw().getValue());
+    return Rotation2d.fromDegrees((gyro.getYaw().getValue()) );
 }
 
 public void resetModulesToAbsolute(){
@@ -188,13 +188,13 @@ public void resetModulesToAbsolute(){
         }
     }
     public void resetPose(Pose2d pose) {
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
+        swerveOdometry.resetPosition((getGyroYaw()), getModulePositions(), pose);
     }
 
     public ChassisSpeeds getRobotRelativeSpeeds(ChassisSpeeds fieldRelativeSpeeds) {
         return ChassisSpeeds.fromFieldRelativeSpeeds(
-            fieldRelativeSpeeds.vxMetersPerSecond,
-            fieldRelativeSpeeds.vyMetersPerSecond,
+            fieldRelativeSpeeds.vxMetersPerSecond ,
+            fieldRelativeSpeeds.vyMetersPerSecond ,
             fieldRelativeSpeeds.omegaRadiansPerSecond,
             getHeading()
         );

@@ -6,11 +6,11 @@ import frc.robot.subsystems.Climber;
 
 public class climberCom extends Command{
 
-    private final Climber climber;
+    private final Climber Climber;
     public final Joystick manipulator;
     public climberCom(Climber climber, Joystick manipulator) {
         
-        this.climber = climber;
+        this.Climber = climber;
         this.manipulator = manipulator;
 
         addRequirements(climber);
@@ -32,8 +32,8 @@ public class climberCom extends Command{
             climbLeft = 0;
         }
     
-        Climber.climbUpLeft(climbLeft);
-        Climber.climbUpRight(climbRight);
+        frc.robot.subsystems.Climber.climbUpLeft(climbLeft);
+        frc.robot.subsystems.Climber.climbUpRight(climbRight);
 
     }
     

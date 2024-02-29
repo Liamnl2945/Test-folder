@@ -20,7 +20,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 
 
-public class TeleopSwerve extends Command {
+public class SwerveAim extends Command {
     
     private boolean isPointLocked = false; 
     private boolean isRotationLocked = false; 
@@ -44,11 +44,10 @@ public class TeleopSwerve extends Command {
 
 
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, 
-        BooleanSupplier robotCentricSup, BooleanSupplier aiming) {
+    public SwerveAim(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
-
+    
         this.translationSup = translationSup;
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
@@ -70,64 +69,38 @@ public class TeleopSwerve extends Command {
     
     @Override
     public void execute() {
-       // System.out.println("\n SHOOTER LOCK WORKS");
-        if (limelightData.targetValid && RobotContainer.aim.getAsBoolean()) {//if limelight sees tag and the aiming is pressed
-                    System.out.println("\n AIM LOCKED");
+        //System.out.println("\n SWERVE AIM EXECUTING");
+        if (limelightData.targetValid) { // If Limelight sees a target
+            //System.out.println("\n AIM LOCKED");
 
             if (limelightData.tagID == 4 || limelightData.tagID == 7) {//Speaker logic
-                        System.out.println("\n SHOOTER LOCKED To Speaker");
+                    //System.out.println("\n SHOOTER LOCKED To Speaker");
                 if(!isPointLocked){//this is to prevent it from creating a new PID everytime, and will use the same PID
-                    System.out.println("\n PID STATEMENT");
+                    //System.out.println("\n PID STATEMENT");
                     isPointLocked = true;
                     isRotationLocked = false; 
                     rotationPIDAprilTagPointLock = new AprilTagPointLock();//create a new PID controller for lockon sequence
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);//standard strafe/translate input
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);
                     rotationVal = rotationPIDAprilTagPointLock.getR();//get rotation value from PID
-                    System.out.println(limelightData.targetXOffset);
+                    //System.out.println(limelightData.targetXOffset);
                 }
                 else{
+                    //System.out.println("\n IN THE SHOOTER ELSE STATEMENT");
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);
                     rotationVal = rotationPIDAprilTagPointLock.getR();
+
                 }
             } 
-            else if (limelightData.tagID == 5 || limelightData.tagID == 6) {//amp logic
-                if(!isRotationLocked){//this is to prevent it from creating a new PID controller everytime, and will use the same PID & LL data
-                    isRotationLocked = true;
-                    isPointLocked = false; 
-                    tagYaw = limelightData.targetYaw;
-                    gyroValue = gyro.getYaw().getValue();
-                    setpoint =  ((gyroValue+tagYaw-10) % 360);
-                    rotationPIDAprilTagRotationLock = new AprilTagRotationLock();
-                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
-                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);                    
-                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), constants.stickDeadband);
-                    
-                }
-                else{
-                    translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
-                    strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);                    
-                    rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), constants.stickDeadband);
-                    //System.out.println(gyro.getYaw().getValue());
-                }
-            }
-        } else {
-
-            isPointLocked = false;
-            isRotationLocked = false; 
-
-            translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
-            strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);
-            rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), constants.stickDeadband);
+            
         }
-        
-        // Drive
         s_Swerve.drive(
             new Translation2d(translationVal, strafeVal).times(!RobotContainer.slowMove.getAsBoolean() ? constants.Swerve.maxSpeed : constants.Swerve.maxSpeed*0.15), 
             rotationVal * constants.Swerve.maxAngularVelocity, 
             !robotCentricSup.getAsBoolean(), 
             true
         );
+        
     }
 }

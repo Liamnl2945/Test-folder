@@ -3,13 +3,14 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.constants;
 
 
 public class Climber extends SubsystemBase{   
 
     
-        static TalonFX climberLeft = new TalonFX(6);
-        static TalonFX climberRight = new TalonFX(7);
+        static TalonFX climberLeft = new TalonFX(constants.Climber.climberLeft);
+        static TalonFX climberRight = new TalonFX(constants.Climber.climberRight);
 
 
         public Climber(){
