@@ -74,9 +74,14 @@ public class TeleopSwerve extends Command {
 
     @Override
     public void execute() {
+       // System.out.println("\n SHOOTER LOCK WORKS");
         if (limelightData.targetValid && RobotContainer.aim.getAsBoolean()) {//if limelight sees tag and the aiming is pressed
+                    System.out.println("\n AIM LOCKED");
+
             if (limelightData.tagID == 4 || limelightData.tagID == 7) {//Speaker logic
+                        System.out.println("\n SHOOTER LOCKED To Speaker");
                 if(!isPointLocked){//this is to prevent it from creating a new PID everytime, and will use the same PID
+                    System.out.println("\n PID STATEMENT");
                     isPointLocked = true;
                     isRotationLocked = false;
                     rotationPIDAprilTagPointLock = new AprilTagPointLock();//create a new PID controller for lockon sequence
@@ -89,7 +94,8 @@ public class TeleopSwerve extends Command {
                     translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), constants.stickDeadband);
                     strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), constants.stickDeadband);          
                 }
-            } else if (limelightData.tagID == 5 || limelightData.tagID == 6) {//amp logic
+            } 
+            else if (limelightData.tagID == 5 || limelightData.tagID == 6) {//amp logic
                 if(!isRotationLocked){//this is to prevent it from creating a new PID controller everytime, and will use the same PID & LL data
                     isRotationLocked = true;
                     isPointLocked = false; 

@@ -68,12 +68,7 @@ public class Swerve extends SubsystemBase {
             () -> { // Boolean supplier that controls when the path will be mirrored for the red alliance
               // This will flip the path being followed to the red side of the field.
               // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
-
-              var alliance = DriverStation.getAlliance();
-              if (alliance.isPresent()) {
-                return alliance.get() == DriverStation.Alliance.Red;
-              }
-              return false;
+              return true;
              }, // Mirroring logic for red alliance
             this
             
@@ -151,8 +146,8 @@ public void zeroHeading(){
     swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
 }
 
-public Rotation2d getGyroYaw() {
-    return Rotation2d.fromDegrees(gyro.getYaw().getValue());
+public Rotation2d   getGyroYaw() {
+    return Rotation2d.fromDegrees((gyro.getYaw().getValue()) );
 }
 
 public void resetModulesToAbsolute(){
@@ -193,13 +188,13 @@ public void resetModulesToAbsolute(){
         }
     }
     public void resetPose(Pose2d pose) {
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
+        swerveOdometry.resetPosition((getGyroYaw()), getModulePositions(), pose);
     }
 
     public ChassisSpeeds getRobotRelativeSpeeds(ChassisSpeeds fieldRelativeSpeeds) {
         return ChassisSpeeds.fromFieldRelativeSpeeds(
-            fieldRelativeSpeeds.vxMetersPerSecond,
-            fieldRelativeSpeeds.vyMetersPerSecond,
+            fieldRelativeSpeeds.vxMetersPerSecond ,
+            fieldRelativeSpeeds.vyMetersPerSecond ,
             fieldRelativeSpeeds.omegaRadiansPerSecond,
             getHeading()
         );
@@ -211,6 +206,7 @@ public void resetModulesToAbsolute(){
 
     public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
         ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
+
 
         SwerveModuleState[] targetStates = constants.Swerve.swerveKinematics.toSwerveModuleStates(targetSpeeds);
         setStates(targetStates);
@@ -237,25 +233,7 @@ public void resetModulesToAbsolute(){
       }
     
     
-      class SimSwerveModule {
-        private SwerveModulePosition currentPosition = new SwerveModulePosition();
-        private SwerveModuleState currentState = new SwerveModuleState();
-    
-        public SwerveModulePosition getPosition() {
-          return currentPosition;
-        }
-    
-        public SwerveModuleState getState() {
-          return currentState;
-        }
-    
-        public void setTargetState(SwerveModuleState targetState) {
-          // Optimize the state
-          currentState = SwerveModuleState.optimize(targetState, currentState.angle);
-    
-          currentPosition = new SwerveModulePosition(currentPosition.distanceMeters + (currentState.speedMetersPerSecond * 0.02), currentState.angle);
-        }
-      }
+      
 
 
       
@@ -276,6 +254,8 @@ public void resetModulesToAbsolute(){
         }
         //field.setRobotPose(getPose());
     }
+
+    
 
     
 }

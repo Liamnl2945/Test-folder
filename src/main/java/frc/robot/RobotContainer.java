@@ -21,13 +21,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Intake_Indexer;
 import frc.robot.commands.RunIndexerCommand;
 import frc.robot.commands.RunShooter;
+import frc.robot.commands.SetShooterSpeedAuto;
 import frc.robot.commands.SetShooterSpeedByAprilTag;
+import frc.robot.commands.SwerveAim;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.climberCom;
+import frc.robot.commands.intake_IndexerAuto;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -50,6 +56,8 @@ public class RobotContainer {
   
   //AUTOS 
     private final SendableChooser<Command> autoChooser;
+    private final ParallelCommandGroup lockGroup;
+
 
   //ShuffleboardTab limelightTab; 
 
@@ -135,10 +143,28 @@ public class RobotContainer {
     
     public RobotContainer(){
 
+      lockGroup = new ParallelCommandGroup(
+      new SetShooterSpeedAuto(S_Shooter),
+      new SwerveAim(s_Swerve, 
+              () -> -driver.getRawAxis(translationAxis), 
+              () -> -driver.getRawAxis(strafeAxis), 
+              () -> -driver.getRawAxis(rotationAxis), 
+              () -> robotCentric.getAsBoolean()      
+              ),
+      new WaitCommand(2),
+      new intake_IndexerAuto(I_Intake,I_Indexer));
+      
+            Command lockGroupgtimed = lockGroup.withTimeout(5);
+              
+
+      NamedCommands.registerCommand("Lock Sequence", lockGroupgtimed); // Set a desired name
       // Build an auto chooser. This will use Commands.none() as the default option.
       //autoChooser = AutoBuilder.buildAutoChooser();
+    
       
-      
+
+      NamedCommands.registerCommand("Lock Print", Commands.print("RUNNING LOCK SEQUENCE"));
+      NamedCommands.registerCommand("Lock FINISHED Print", Commands.print("LOCK SEQUENCE FINISHED"));
       NamedCommands.registerCommand("SHOOTER RUN", RunShooter);
       NamedCommands.registerCommand("Intake & Indexer", intake_Indexer);
       NamedCommands.registerCommand("indexer ONLY", RunIndexerCommand);
@@ -150,7 +176,9 @@ public class RobotContainer {
               () -> -driver.getRawAxis(rotationAxis), 
               () -> robotCentric.getAsBoolean(),
               () -> aim.getAsBoolean()
-              ) );
+              ) 
+              );
+
 
 
       
@@ -210,51 +238,7 @@ public class RobotContainer {
 
       // Add a button to run the example auto to SmartDashboard, this will also be in the auto chooser built above
     SmartDashboard.putData("Example Auto", new PathPlannerAuto("New Auto"));
-
-    // Add a button to run pathfinding commands to SmartDashboard
-    SmartDashboard.putData("Pathfind to Pickup Pos", AutoBuilder.pathfindToPose(
-      new Pose2d(14.0, 6.5, Rotation2d.fromDegrees(0)), 
-      new PathConstraints(
-        4.0, 4.0, 
-        Units.degreesToRadians(360), Units.degreesToRadians(540)
-      ), 
-      0, 
-      2.0
-    ));
-    SmartDashboard.putData("Pathfind to Scoring Pos", AutoBuilder.pathfindToPose(
-      new Pose2d(2.15, 3.0, Rotation2d.fromDegrees(180)), 
-      new PathConstraints(
-        4.0, 4.0, 
-        Units.degreesToRadians(360), Units.degreesToRadians(540)
-      ), 
-      0, 
-      0
-    ));
-
-    // Add a button to SmartDashboard that will create and follow an on-the-fly path
-    // This example will simply move the robot 2m in the +X field direction
-    SmartDashboard.putData("On-the-fly path", Commands.runOnce(() -> {
-      Pose2d currentPose = s_Swerve.getPose();
-      
-      // The rotation component in these poses represents the direction of travel
-      Pose2d startPos = new Pose2d(currentPose.getTranslation(), new Rotation2d());
-      Pose2d endPos = new Pose2d(currentPose.getTranslation().plus(new Translation2d(2.0, 0.0)), new Rotation2d());
-
-      List<Translation2d> bezierPoints = PathPlannerPath.bezierFromPoses(startPos, endPos);
-      PathPlannerPath path = new PathPlannerPath(
-        bezierPoints, 
-        new PathConstraints(
-          4.0, 4.0, 
-          Units.degreesToRadians(360), Units.degreesToRadians(540)
-        ),  
-        new GoalEndState(0.0, currentPose.getRotation())
-      );
-
-      // Prevent this path from being flipped on the red alliance, since the given positions are already correct
-      path.preventFlipping = true;
-
-      AutoBuilder.followPath(path).schedule();
-    }));
+    
   }
 
 
