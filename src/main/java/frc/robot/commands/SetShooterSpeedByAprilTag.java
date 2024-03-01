@@ -34,9 +34,16 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
                 case 4:  // Adjust speed for RED SPEAKER
                     speed = 1.0;   // Example speed for Tag 2
                     //System.out.println("\n\n RED Speaker DETECTED");
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                    speed = TeleopSwerve.trapShooterSpeed;
                     break;
                 default:
-                    speed = 0.5;   // defualt speed, even if no tag is detected it will spin up when the aim is pressed
+                    speed = 0.15;   // defualt speed, even if no tag is detected it will spin up when the aim is pressed
             }
         }
         shooter.runShooterAtSpeed(speed);

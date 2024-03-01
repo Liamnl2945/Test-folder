@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase{   
 
     
-        static TalonFX climberLeft = new TalonFX(6);
-        static TalonFX climberRight = new TalonFX(7);
+        static TalonFX climberLeft = new TalonFX(14);
+        static TalonFX climberRight = new TalonFX(15);
 
 
         public Climber(){

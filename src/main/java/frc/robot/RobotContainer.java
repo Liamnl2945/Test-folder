@@ -99,7 +99,7 @@ public class RobotContainer {
   /* Driver Buttons */
   private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
   private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kX.value);
-  public final static JoystickButton aim = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
+  public final static JoystickButton aim = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
   public final static JoystickButton slowMove = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
  
@@ -125,7 +125,7 @@ public class RobotContainer {
 
     
   //one button code
-  private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,manipulator);
+  private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,driver);
   private final climberCom climberCommand = new climberCom(C_Climber, manipulator);
   private final SetShooterSpeedByAprilTag ShooterAprilTags = new SetShooterSpeedByAprilTag(S_Shooter);
   private final RunIndexerCommand RunIndexerCommand = new RunIndexerCommand(I_Indexer);
