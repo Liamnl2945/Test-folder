@@ -30,6 +30,7 @@ import frc.robot.commands.RunIndexerCommand;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.SetShooterSpeedAuto;
 import frc.robot.commands.SetShooterSpeedByAprilTag;
+import frc.robot.commands.StopShooterCommand;
 import frc.robot.commands.SwerveAim;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.climberCom;
@@ -57,6 +58,7 @@ public class RobotContainer {
   //AUTOS 
     private final SendableChooser<Command> autoChooser;
     private final ParallelCommandGroup lockGroup;
+    private final SequentialCommandGroup indexerCmd;
 
 
   //ShuffleboardTab limelightTab; 
@@ -138,6 +140,7 @@ public class RobotContainer {
   private final SetShooterSpeedByAprilTag ShooterAprilTags = new SetShooterSpeedByAprilTag(S_Shooter);
   private final RunIndexerCommand RunIndexerCommand = new RunIndexerCommand(I_Indexer);
   private final RunShooter RunShooter = new RunShooter(S_Shooter);
+  
 
 
     
@@ -150,14 +153,20 @@ public class RobotContainer {
               () -> -driver.getRawAxis(strafeAxis), 
               () -> -driver.getRawAxis(rotationAxis), 
               () -> robotCentric.getAsBoolean()      
-              ),
-      new WaitCommand(2),
-      new intake_IndexerAuto(I_Intake,I_Indexer));
+              ));
+      Command lockGroupgtimed = lockGroup.withTimeout(4);
+
+      indexerCmd = new SequentialCommandGroup(
+        new WaitCommand(2),
+        new intake_IndexerAuto(I_Intake, I_Indexer)
+      );
+      Command indexerTimed = indexerCmd.withTimeout(3.5);
+      StopShooterCommand StopShooterCommand = new StopShooterCommand(S_Shooter);
       
-            Command lockGroupgtimed = lockGroup.withTimeout(5);
               
 
       NamedCommands.registerCommand("Lock Sequence", lockGroupgtimed); // Set a desired name
+      NamedCommands.registerCommand("IndexerRun", indexerTimed);
       // Build an auto chooser. This will use Commands.none() as the default option.
       //autoChooser = AutoBuilder.buildAutoChooser();
     
@@ -165,19 +174,13 @@ public class RobotContainer {
 
       NamedCommands.registerCommand("Lock Print", Commands.print("RUNNING LOCK SEQUENCE"));
       NamedCommands.registerCommand("Lock FINISHED Print", Commands.print("LOCK SEQUENCE FINISHED"));
+      NamedCommands.registerCommand("Intaked Print", Commands.print("INTAKE RAN"));
+      NamedCommands.registerCommand("Stop Shooter", StopShooterCommand);
       NamedCommands.registerCommand("SHOOTER RUN", RunShooter);
       NamedCommands.registerCommand("Intake & Indexer", intake_Indexer);
       NamedCommands.registerCommand("indexer ONLY", RunIndexerCommand);
       NamedCommands.registerCommand("Shooter Lock", ShooterAprilTags);
-      NamedCommands.registerCommand("Lock PID",  new TeleopSwerve(
-              s_Swerve, 
-              () -> -driver.getRawAxis(translationAxis), 
-              () -> -driver.getRawAxis(strafeAxis), 
-              () -> -driver.getRawAxis(rotationAxis), 
-              () -> robotCentric.getAsBoolean(),
-              () -> aim.getAsBoolean()
-              ) 
-              );
+      
 
 
 
@@ -237,7 +240,7 @@ public class RobotContainer {
       SmartDashboard.putData("Example", new PathPlannerAuto("New Auto"));
 
       // Add a button to run the example auto to SmartDashboard, this will also be in the auto chooser built above
-    SmartDashboard.putData("Example Auto", new PathPlannerAuto("New Auto"));
+      SmartDashboard.putData("Example Auto", new PathPlannerAuto("New Auto"));
     
   }
 
