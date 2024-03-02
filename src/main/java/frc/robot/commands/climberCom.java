@@ -31,8 +31,8 @@ public class climberCom extends Command{
         if (Math.abs(climbLeft) < 0.15) {
             climbLeft = 0;
         }
-    
-        frc.robot.subsystems.Climber.climbUpLeft(climbLeft);
+
+        //frc.robot.subsystems.Climber.climbUpLeft(climbLeft);
         frc.robot.subsystems.Climber.climbUpRight(climbRight);
 
     }

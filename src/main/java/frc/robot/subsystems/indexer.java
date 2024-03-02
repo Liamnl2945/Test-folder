@@ -20,7 +20,7 @@ public indexer(){
     indexerLeft.configFactoryDefault();
 
     indexerRight.setInverted(true);
-    indexerLeft.setInverted(true);
+    indexerLeft.setInverted(false);
     
     indexerRight.setNeutralMode(NeutralMode.Brake);
     indexerLeft.setNeutralMode(NeutralMode.Brake);
