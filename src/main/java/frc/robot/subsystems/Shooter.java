@@ -16,8 +16,8 @@ public class Shooter extends SubsystemBase {
     
 
     public Shooter(){
-        ShooterLeft.setInverted(false);
-        ShooterRight.setInverted(true);
+        ShooterLeft.setInverted(true);
+        ShooterRight.setInverted(false);
         ShooterRight.setNeutralMode(NeutralModeValue.Coast);
         ShooterLeft.setNeutralMode(NeutralModeValue.Coast);
     }

@@ -9,49 +9,40 @@ import frc.robot.constants;
 
 
 public class Climber extends SubsystemBase{   
-
+   private static Pigeon2 gyro;
+   private static double skew;
     
         static TalonFX climberLeft = new TalonFX(constants.Climber.climberLeft);
         static TalonFX climberRight = new TalonFX(constants.Climber.climberRight);
         public Pigeon2 gyro;
 
 
-      public Climber(){
-      climberLeft.setInverted(true);
-      climberRight.setInverted(true);
-      climberLeft.setNeutralMode(NeutralModeValue.Brake);
-      climberRight.setNeutralMode(NeutralModeValue.Brake);
-      gyro = new Pigeon2(constants.Swerve.pigeonID);
-      gyro.getConfigurator().apply(new Pigeon2Configuration());
-      
-      
-      
-      }
-
-      public static void ClimberBalanced(double speed){
-         
-      }
+        public Climber(){
+        climberLeft.setInverted(true);
+        climberRight.setInverted(true);
+        climberLeft.setNeutralMode(NeutralModeValue.Brake);
+        climberRight.setNeutralMode(NeutralModeValue.Brake);
+     }
 
      public static void climbUpLeft(double speed){
-        climberLeft.set(speed);  
+        climberLeft.set(speed);
+        
      }
-     public static void getRoll(){
-      
+     public static double calculateSkew(){
+      System.out.println(gyro.getRoll().getValue()/35);
+      return gyro.getRoll().getValue()/35;
      }
-
      public static void climbUpRight(double speed){
-        climberRight.set(speed);
+        skew = calculateSkew();
+        climberRight.set(speed + skew);
+        climberLeft.set(speed - skew);
      }
 
-     public void climbDownLeft(double speed){
-        climberLeft.set(-speed);
-     }
      public void climbDownRight(double speed){
-        climberRight.set(-speed);
+        skew = calculateSkew();
+        climberRight.set(-speed - skew);
+        climberLeft.set(-speed + skew);
      }
-
-
-
 }
 
 

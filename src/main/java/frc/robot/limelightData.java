@@ -22,6 +22,7 @@ public class limelightData {
         public static double targetYOffset;
         public static double targetArea;
         public static boolean targetValid;
+        public static double distance2d;
 
     public void calculate() {
 
@@ -29,7 +30,7 @@ public class limelightData {
         needStrafe = 0;
         needTranslate = 0;
 
-        double[] targetPose = limelightTable.getEntry("targetpose_robotspace").getDoubleArray(new double[6]);
+        double[] targetPose = limelightTable.getEntry("targetpose_cameraspace").getDoubleArray(new double[6]);
 
         targetXOffset = limelightTable.getEntry("tx").getDouble(0.0);
         targetYOffset = limelightTable.getEntry("ty").getDouble(0.0);
@@ -39,12 +40,15 @@ public class limelightData {
         YC = targetPose[1];
         ZC = targetPose[2];
         targetYaw = targetPose[5];
-        //System.out.println(limelightData.targetYaw);
+        distance2d = Math.sqrt((XC*XC)+(ZC*ZC));
+
+       // System.out.println("X:" + XC + " Y: " + YC + " Z: " + ZC);
+        //System.out.println(distance2d);
 
         //double targetRoll = targetPose[3];
         //double targetPitch = targetPose[4];
         
-        if(tagID == 4 || tagID == 5 ||tagID == 6 ||tagID == 7){
+        if(tagID == 4 || tagID == 5 ||tagID == 6 ||tagID == 7 || tagID == 11 || tagID == 12 || tagID == 13 || tagID == 14 || tagID == 15 || tagID == 16){
             targetValid = true;
         }
         else{

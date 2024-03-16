@@ -109,11 +109,20 @@ public class RobotContainer {
   /* Driver Buttons */
   private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
   private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kX.value);
-  public final static JoystickButton aim = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
   public final static JoystickButton slowMove = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
- 
 
+  public final static JoystickButton aim = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
+  public final JoystickButton shooterReverse = new JoystickButton(manipulator, XboxController.Button.kB.value);
+  public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kX.value);
+  public final JoystickButton ShootLimeLight = new JoystickButton(manipulator, XboxController.Button.kY.value);
+
+    //one button code
+  private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,manipulator);
+  private final climberCom climberCommand = new climberCom(C_Climber, manipulator);
+  private final SetShooterSpeedByAprilTag ShooterAprilTags = new SetShooterSpeedByAprilTag(S_Shooter);
+  private final RunIndexerCommand RunIndexerCommand = new RunIndexerCommand(I_Indexer);
+  private final RunShooter RunShooter = new RunShooter(S_Shooter);
   //intake
   //public final JoystickButton intakeIn = new JoystickButton(manipulator, XboxController.Button.kLeftBumper.value);
   // public final JoystickButton intakeOut = new JoystickButton(manipulator, XboxController.Button.kRightBumper.value);
@@ -126,9 +135,7 @@ public class RobotContainer {
    //shooter
 
   //public final JoystickButton shooterRun = new JoystickButton(manipulator, XboxController.Button.kA.value);
-  public final JoystickButton shooterReverse = new JoystickButton(manipulator, XboxController.Button.kB.value);
-  public final JoystickButton slowShoot = new JoystickButton(manipulator, XboxController.Button.kX.value);
-  public final JoystickButton ShootLimeLight = new JoystickButton(manipulator, XboxController.Button.kY.value);
+
   //private RotationSource hijackableRotation = new JoystickLock(); // get rotation from driver input;
 
   
@@ -140,7 +147,6 @@ public class RobotContainer {
   private final SetShooterSpeedByAprilTag ShooterAprilTags = new SetShooterSpeedByAprilTag(S_Shooter);
   private final RunIndexerCommand RunIndexerCommand = new RunIndexerCommand(I_Indexer);
   private final RunShooter RunShooter = new RunShooter(S_Shooter);
-  
 
 
     
