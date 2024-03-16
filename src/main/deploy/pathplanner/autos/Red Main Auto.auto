@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3374413054104268,
-      "y": 5.574358195791997
+      "x": 15.364588421484537,
+      "y": 5.555088802485298
     },
     "rotation": 0.0
   },
@@ -12,12 +12,6 @@
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Lock Print"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -39,12 +33,6 @@
         {
           "type": "named",
           "data": {
-            "name": "Lock FINISHED Print"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "Stop Shooter"
           }
         },
@@ -55,78 +43,16 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Indexer4Reverse"
+                  "name": "IndexerRun"
                 }
               },
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue Back Up from Speaker "
+                  "pathName": "Red Back up from Speaker"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intaked Print"
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Stop"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Reverse"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Stop"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue return to speaker"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Lock Sequence"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "IndexerRun"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Stop Shooter"
           }
         },
         {
@@ -136,14 +62,33 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "Red return to speaker"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
-            "commands": []
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Lock Sequence"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IndexerRun"
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
-  "folder": "Blue Autos",
+  "folder": "Red Autos",
   "choreoAuto": false
 }

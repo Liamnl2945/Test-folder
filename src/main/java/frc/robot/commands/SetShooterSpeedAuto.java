@@ -24,7 +24,7 @@ public class SetShooterSpeedAuto extends InstantCommand {
                     //System.out.println("\n\n BLUE AMP DETECTED");
                     break;
                 case 7:  // Adjust speed for BLUE SPEAKER
-                    speed = 1.0;   // Example speed for Tag 2
+                    speed = 0.8;   // Example speed for Tag 2
                     //System.out.println("\n\n BLUE Speaker DETECTED");
                     break;
                 case 5:  // Adjust speed for RED AMP
@@ -32,7 +32,7 @@ public class SetShooterSpeedAuto extends InstantCommand {
                    //System.out.println("\n\n RED AMP DETECTED");
                     break;
                 case 4:  // Adjust speed for RED SPEAKER
-                    speed = 1.0;   // Example speed for Tag 2
+                    speed = .8;   // Example speed for Tag 2
                     //System.out.println("\n\n RED Speaker DETECTED");
                     break;
                 default:

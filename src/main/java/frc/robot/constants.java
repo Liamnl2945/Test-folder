@@ -20,7 +20,7 @@ public class constants {
     
     public final class Intake{
         public static final int intakeBot = 9;
-        public static final int intakeTop = 10;
+        public static final int intakeTop = 16;
     }
     public final class indexer{
         public static final int indexerLeft = 11;
@@ -37,7 +37,8 @@ public class constants {
     }
     public final class Climber {
         public static final int climberLeft = 14;
-        public static final int climberRight = 15;
+        //public static final int climberRight = 15;
+        public static final int botLimitSwitch = 2;
     }
     public final class LimelightConstants{
         public static final int PIPELINE_VISION = 0;
@@ -80,11 +81,6 @@ public class constants {
         public static final double angleCurrentThresholdTime  = 0.1;
         public static final boolean angleEnableCurrentLimit  = true;
 
-        public static final int driveContinuousCurrentLimit = 35;
-        public static final int drivePeakCurrentLimit = 60;
-        public static final double drivePeakCurrentDuration = 0.1;
-       
-
         public static final int driveCurrentLimit = 35;
         public static final int driveCurrentThreshold = 60;
         public static final double driveCurrentThresholdTime = 0.1;
@@ -116,7 +112,7 @@ public class constants {
         /** Meters per Second */
         public static double  maxSpeed = 4.5; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static double maxAngularVelocity = 12; //TODO: This must be tuned to specific robot
+        public static double maxAngularVelocity = 12.0; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -174,13 +170,13 @@ public class constants {
         }
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(5.00, 0, 0), // Translation constants 
-      new PIDConstants(5.00, 0, 0), // Rotation constants 
+      new PIDConstants(82.00, 0, 0), // Translation constants 
+      new PIDConstants(40.0, 0, 0), // Rotation constants 
       maxSpeed, 
       0.43, // Drive base radius (distance from center to furthest module) 
       new ReplanningConfig()
     );
-        
+      
     }
      
   

@@ -36,8 +36,9 @@ public class Shooter extends SubsystemBase {
     }
 
     public void reverseShooter() {
-        ShooterLeft.set(-0.5);
-        ShooterRight.set(-0.5);
+        ShooterLeft.set(-1);
+        ShooterRight.set(-1);
+        //System.out.println("REVERESE SHOOTER");
     }
 
     public void stopShooter(){

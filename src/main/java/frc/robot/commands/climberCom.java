@@ -18,6 +18,7 @@ public class climberCom extends Command{
 
     @Override 
     public void execute() {
+       
         double climbLeft = manipulator.getRawAxis(1); // Get the left stick's Y-axis value
          // Get right stick's Y-axis value
         double climbRight = manipulator.getRawAxis(5); // Use axis 5 for right stick Y
@@ -33,7 +34,7 @@ public class climberCom extends Command{
         }
 
         //frc.robot.subsystems.Climber.climbUpLeft(climbLeft);
-        frc.robot.subsystems.Climber.climbUpRight(climbRight);
+        frc.robot.subsystems.Climber.climbUpLeft(climbLeft);
 
     }
     

@@ -28,18 +28,18 @@ public Intake(){
 public void runIntake() {
     intakeTop.set(speed);
     intakeBot.set(speed);
-    System.out.println("RUN INTAKE \n\n\n");
+    //System.out.println("RUN INTAKE \n\n\n");
 }
 
 public void reverseIntake() {
     intakeTop.set(-speed);
     intakeBot.set(-speed);
-    System.out.println("REVERSE INTAKE \n\n\n");
+    //System.out.println("REVERSE INTAKE \n\n\n");
 }
 public void slowReverseIntake(){
-    intakeTop.set(speed);
-    intakeBot.set(speed);
-    System.out.println("REVERSE INTAKE SLOW \n\n\n");
+    intakeTop.set(-.2);
+    intakeBot.set(-.2);
+    //System.out.println("REVERSE INTAKE SLOW \n\n\n");
 }
 
 public void stopIntake(){

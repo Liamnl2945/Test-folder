@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Intake_Indexer;
+import frc.robot.commands.Intake_IndexerReverse;
 import frc.robot.commands.RunIndexerCommand;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.SetShooterSpeedAuto;
@@ -35,6 +36,7 @@ import frc.robot.commands.SwerveAim;
 import frc.robot.commands.TeleopSwerve;
 import frc.robot.commands.climberCom;
 import frc.robot.commands.intake_IndexerAuto;
+import frc.robot.commands.intake_indexerStop;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -59,6 +61,7 @@ public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
     private final ParallelCommandGroup lockGroup;
     private final SequentialCommandGroup indexerCmd;
+    private final SequentialCommandGroup indexerStopCommand;
 
 
   //ShuffleboardTab limelightTab; 
@@ -141,12 +144,7 @@ public class RobotContainer {
   
 
     
-  //one button code
-  private final Intake_Indexer intake_Indexer = new Intake_Indexer(I_Intake,I_Indexer,manipulator);
-  private final climberCom climberCommand = new climberCom(C_Climber, manipulator);
-  private final SetShooterSpeedByAprilTag ShooterAprilTags = new SetShooterSpeedByAprilTag(S_Shooter);
-  private final RunIndexerCommand RunIndexerCommand = new RunIndexerCommand(I_Indexer);
-  private final RunShooter RunShooter = new RunShooter(S_Shooter);
+  
 
 
     
@@ -160,19 +158,37 @@ public class RobotContainer {
               () -> -driver.getRawAxis(rotationAxis), 
               () -> robotCentric.getAsBoolean()      
               ));
-      Command lockGroupgtimed = lockGroup.withTimeout(4);
+      Command lockGroupgtimed = lockGroup.withTimeout(3);
 
       indexerCmd = new SequentialCommandGroup(
-        new WaitCommand(2),
+        new WaitCommand(1.5),
         new intake_IndexerAuto(I_Intake, I_Indexer)
       );
-      Command indexerTimed = indexerCmd.withTimeout(3.5);
-      StopShooterCommand StopShooterCommand = new StopShooterCommand(S_Shooter);
+      indexerStopCommand = new SequentialCommandGroup(
+        new intake_indexerStop(I_Intake,I_Indexer)
+      );
+      Command indexerinverted = new SequentialCommandGroup(
+        new Intake_IndexerReverse(I_Intake, I_Indexer)
+      );
+
+
+      Command indexerStopTimed = indexerStopCommand.withTimeout(.05);
+      Command indexerTimed = indexerCmd.withTimeout(3);
+      Command indexerReverse = indexerinverted.withTimeout(.5);
+      //Command indexerRunThing = indexerCmd.withTimeout(4);
+      Command StopShooterCommand = new StopShooterCommand(S_Shooter);
+      //Command StopShooterInstant = new InstantCommand(new StopShooterCommand(S_Shooter));
       
               
 
       NamedCommands.registerCommand("Lock Sequence", lockGroupgtimed); // Set a desired name
       NamedCommands.registerCommand("IndexerRun", indexerTimed);
+      NamedCommands.registerCommand("indexer Stop", indexerStopTimed);
+      NamedCommands.registerCommand("indexer Reverse", indexerReverse);
+      //NamedCommands.registerCommand("Indexer4Reverse", indexerRunThing);
+
+
+
       // Build an auto chooser. This will use Commands.none() as the default option.
       //autoChooser = AutoBuilder.buildAutoChooser();
     

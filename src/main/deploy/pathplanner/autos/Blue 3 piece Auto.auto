@@ -2,21 +2,15 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3374413054104268,
-      "y": 5.574358195791997
+      "x": 1.2437546130441748,
+      "y": 5.515804013063089
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
-        {
-          "type": "named",
-          "data": {
-            "name": "Lock Print"
-          }
-        },
         {
           "type": "parallel",
           "data": {
@@ -39,12 +33,6 @@
         {
           "type": "named",
           "data": {
-            "name": "Lock FINISHED Print"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "Stop Shooter"
           }
         },
@@ -61,16 +49,10 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue Back Up from Speaker "
+                  "pathName": "Blue piece 1"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intaked Print"
           }
         },
         {
@@ -101,7 +83,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue return to speaker"
+            "pathName": "Blue piece 1 return"
           }
         },
         {
@@ -126,7 +108,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Stop Shooter"
+            "name": "indexer Stop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue piece 2"
           }
         },
         {
@@ -138,7 +126,58 @@
         {
           "type": "parallel",
           "data": {
-            "commands": []
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue piece 2 return"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "indexer Reverse"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "indexer Stop"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Lock Sequence"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IndexerRun"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "indexer Stop"
           }
         }
       ]

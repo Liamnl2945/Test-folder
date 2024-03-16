@@ -44,7 +44,7 @@ public class Swerve extends SubsystemBase {
     public Swerve() {
         gyro = new Pigeon2(constants.Swerve.pigeonID);
         gyro.getConfigurator().apply(new Pigeon2Configuration());
-        gyro.setYaw(0);
+        //gyro.setYaw(0);
 
         
 
@@ -68,7 +68,7 @@ public class Swerve extends SubsystemBase {
             () -> { // Boolean supplier that controls when the path will be mirrored for the red alliance
               // This will flip the path being followed to the red side of the field.
               // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
-              return true;
+              return false;
              }, // Mirroring logic for red alliance
             this
             
@@ -78,6 +78,19 @@ public class Swerve extends SubsystemBase {
        // PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
 
         //SmartDashboard.putData("Field", field);
+    }
+     @Override
+    public void periodic(){
+        swerveOdometry.update(getGyroYaw(), getModulePositions());  
+
+        for(SwerveModule mod : mSwerveMods){
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCANcoder().getDegrees());
+            //SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
+          //  SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+        }
+        //field.setRobotPose(getPose());
+        //System.out.println(gyro.getAccelerationX());
+        //System.out.println(gyro.getAccelerationY());
     }
 
    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -243,17 +256,7 @@ public void resetModulesToAbsolute(){
 
     
 
-    @Override
-    public void periodic(){
-        swerveOdometry.update(getGyroYaw(), getModulePositions());  
-
-        for(SwerveModule mod : mSwerveMods){
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCANcoder().getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
-        }
-        //field.setRobotPose(getPose());
-    }
+   
 
     
 

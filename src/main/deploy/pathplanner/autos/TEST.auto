@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3669845521509223,
-      "y": 5.53
+      "x": 1.2320437764983934,
+      "y": 5.562647359246215
     },
-    "rotation": 180.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue 2 score"
+            "pathName": "TEST "
           }
         }
       ]
