@@ -24,21 +24,21 @@ public indexer(){
     
     indexerRight.setNeutralMode(NeutralMode.Brake);
     indexerLeft.setNeutralMode(NeutralMode.Brake);
-    System.out.println("\n LEFT LIMIT SWITCH "+ limitSwitchLeft.get());
-    System.out.println("\nRIGHT LIMIT SWITCH "+limitSwitchRight.get());
+    //System.out.println("\n LEFT LIMIT SWITCH "+ limitSwitchLeft.get());
+    //System.out.println("\nRIGHT LIMIT SWITCH "+limitSwitchRight.get());
 }
 
 public void runIndexer() {
-    System.out.println("\n LEFT LIMIT SWITCH "+ limitSwitchLeft.get());
-    System.out.println("\nRIGHT LIMIT SWITCH "+limitSwitchRight.get());
+    //System.out.println("\n LEFT LIMIT SWITCH "+ limitSwitchLeft.get());
+    //System.out.println("\nRIGHT LIMIT SWITCH "+limitSwitchRight.get());
     if (limitSwitchLeft.get() || limitSwitchRight.get()) {  // Check if top limit switch is not pressed
-        System.out.println("INDEXER RUNNING");
+        //System.out.println("INDEXER RUNNING");
         indexerRight.set(speed);
         indexerLeft.set(speed);
         //System.out.println("RUN INDEXER \n\n\n");
     }
     if(!limitSwitchLeft.get() || !limitSwitchRight.get()) {
-        System.out.println("INDEXER NOT RUNNING");
+        //System.out.println("INDEXER NOT RUNNING");
         stopIndexer();  // Stop if limit switch is activated
     }
 }

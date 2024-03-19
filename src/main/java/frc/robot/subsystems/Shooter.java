@@ -18,8 +18,8 @@ public class Shooter extends SubsystemBase {
     public Shooter(){
         ShooterLeft.setInverted(true);
         ShooterRight.setInverted(false);
-        ShooterRight.setNeutralMode(NeutralModeValue.Coast);
-        ShooterLeft.setNeutralMode(NeutralModeValue.Coast);
+        ShooterRight.setNeutralMode(NeutralModeValue.Brake);
+        ShooterLeft.setNeutralMode(NeutralModeValue.Brake);
     }
 
    // public void runShooter() {
@@ -36,8 +36,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public void reverseShooter() {
-        ShooterLeft.set(-1);
-        ShooterRight.set(-1);
+        ShooterLeft.set(-0.25);
+        ShooterRight.set(-0.25);
         //System.out.println("REVERESE SHOOTER");
     }
 
@@ -57,6 +57,11 @@ public class Shooter extends SubsystemBase {
     public void AutorunShooter() {
         ShooterLeft.set(1.0);
         ShooterRight.set(1.0);
+   }
+   public void shooterRevUp(){
+        ShooterLeft.set(0.5);
+        ShooterRight.set(0.5);
+
    }
     
     

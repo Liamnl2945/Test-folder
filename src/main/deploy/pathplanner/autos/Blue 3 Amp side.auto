@@ -2,21 +2,15 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.3374413054104268,
-      "y": 5.574358195791997
+      "x": 0.7636103146671328,
+      "y": 6.522935956000301
     },
-    "rotation": 0.0
+    "rotation": 60.64224645720866
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
-        {
-          "type": "named",
-          "data": {
-            "name": "Lock Print"
-          }
-        },
         {
           "type": "parallel",
           "data": {
@@ -24,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -39,38 +33,13 @@
         {
           "type": "named",
           "data": {
-            "name": "Lock FINISHED Print"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "Stop Shooter"
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Indexer4Reverse"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue Back Up from Speaker "
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Intaked Print"
+            "pathName": "Blue Amp side "
           }
         },
         {
@@ -80,7 +49,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "indexer Stop"
+                  "name": "ShooterReverse"
                 }
               },
               {
@@ -92,16 +61,29 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "indexer Stop"
+                  "name": "ShooterRev"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "Blue return to speaker"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue Amp side return"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShooterRev"
+                }
+              }
+            ]
           }
         },
         {
@@ -111,7 +93,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -124,21 +106,34 @@
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "Stop Shooter"
+            "pathName": "Blue MidLine pickup"
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "indexer Stop"
+            "pathName": "Blue MidLine Return"
           }
         },
         {
           "type": "parallel",
           "data": {
-            "commands": []
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunShooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IndexerRun"
+                }
+              }
+            ]
           }
         }
       ]

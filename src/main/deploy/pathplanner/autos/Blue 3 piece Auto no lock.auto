@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.2437546130441748,
-      "y": 5.515804013063089
+      "x": 9.74582194528155,
+      "y": 5.550936522700434
     },
     "rotation": 0
   },
@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -62,7 +62,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ShooterRev"
+                  "name": "ShooterReverse"
                 }
               },
               {
@@ -131,7 +131,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -200,7 +200,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
