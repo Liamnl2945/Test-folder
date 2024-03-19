@@ -3,41 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.2320437764983934,
-        "y": 5.5040931765173085
+        "x": 15.4138668334398,
+        "y": 5.550936522700434
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.7320437764983934,
-        "y": 5.5040931765173085
+        "x": 15.4738668334398,
+        "y": 5.550936522700434
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.1806215367066955,
-        "y": 6.956236908194216
+        "x": 13.153675380103971,
+        "y": 5.550936522700434
       },
       "prevControl": {
-        "x": 1.9306215367066955,
-        "y": 6.956236908194216
-      },
-      "nextControl": {
-        "x": 2.4306215367066955,
-        "y": 6.956236908194216
-      },
-      "isLocked": false,
-      "linkedName": null
-    },
-    {
-      "anchor": {
-        "x": 3.69131945111251,
-        "y": 6.956236908194216
-      },
-      "prevControl": {
-        "x": 3.81631945111251,
-        "y": 6.956236908194216
+        "x": 13.09367538010397,
+        "y": 5.550936522700434
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,7 +29,19 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 0.55,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 2.0,
+        "maxAcceleration": 1.0,
+        "maxAngularVelocity": 600.0,
+        "maxAngularAcceleration": 200.0
+      }
+    }
+  ],
   "eventMarkers": [
     {
       "name": "New Event Marker",
@@ -66,7 +62,7 @@
     },
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 2.0,
+      "waypointRelativePos": 1.0,
       "command": {
         "type": "parallel",
         "data": {
@@ -90,13 +86,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 180.0,
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Blue Paths",
+  "folder": "Red Paths",
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 180.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

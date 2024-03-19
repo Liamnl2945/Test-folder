@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.2437546130441748,
-      "y": 5.515804013063089
+      "x": 15.4138668334398,
+      "y": 5.550936522700434
     },
-    "rotation": 0
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -41,15 +41,9 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Indexer4Reverse"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue piece 1"
+                  "pathName": "Red pickup 1"
                 }
               }
             ]
@@ -62,7 +56,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ShooterRev"
+                  "name": "ShooterReverse"
                 }
               },
               {
@@ -109,7 +103,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Blue piece 1 return"
+                        "pathName": "Red return 1"
                       }
                     },
                     {
@@ -131,7 +125,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -158,7 +152,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue piece 2"
+            "pathName": "red pickup 2"
           }
         },
         {
@@ -168,7 +162,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue piece 2 return"
+                  "pathName": "red return 2"
                 }
               },
               {
@@ -200,7 +194,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -215,6 +209,6 @@
       ]
     }
   },
-  "folder": "Blue Autos",
+  "folder": "Red Autos",
   "choreoAuto": false
 }

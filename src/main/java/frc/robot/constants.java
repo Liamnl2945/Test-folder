@@ -89,7 +89,7 @@ public class constants {
         /* These values are used by the drive falcon to ramp in open loop and closed loop driving.
          * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc */
         public static final double openLoopRamp = 0.25;
-        public static final double closedLoopRamp = 0.0;
+        public static final double closedLoopRamp = 0.25;
 
         /* Angle Motor PID Values */
         public static final double angleKP = chosenModule.angleKP;
@@ -104,15 +104,15 @@ public class constants {
 
         /* Drive Motor Characterization Values 
          * Divide SYSID values by 12 to convert from volts to percent output for CTRE */
-        public static final double driveKS = (0.32 / 12); //TODO: This must be tuned to specific robot
-        public static final double driveKV = (1.51 / 12);
-        public static final double driveKA = (0.27 / 12);
+        public static final double driveKS = (0.32); //TODO: This must be tuned to specific robot
+        public static final double driveKV = (1.51 );
+        public static final double driveKA = (0.27 );
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static double  maxSpeed = 4.5; //TODO: This must be tuned to specific robot
+        public static double  maxSpeed = 5.1; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static double maxAngularVelocity = 12.0; //TODO: This must be tuned to specific robot
+        public static double maxAngularVelocity = 10.0; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -170,12 +170,17 @@ public class constants {
         }
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
-      new PIDConstants(82.00, 0, 0), // Translation constants 
-      new PIDConstants(40.0, 0, 0), // Rotation constants 
-      maxSpeed, 
+      new PIDConstants(5.0, 0.5, 0.0), // Translation constants 
+      new PIDConstants(5.0,0.0, 0.0), // Rotation constants 
+      4.5, 
       0.43, // Drive base radius (distance from center to furthest module) 
       new ReplanningConfig()
     );
       
     }
+     
+  
+
+
+    
 }

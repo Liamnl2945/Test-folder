@@ -32,6 +32,8 @@ import frc.robot.commands.RunIndexerCommand;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.SetShooterSpeedAuto;
 import frc.robot.commands.SetShooterSpeedByAprilTag;
+import frc.robot.commands.ShooterReverse;
+import frc.robot.commands.ShooterSpeedup;
 import frc.robot.commands.StopShooterCommand;
 import frc.robot.commands.SwerveAim;
 import frc.robot.commands.TeleopSwerve;
@@ -161,10 +163,10 @@ public class RobotContainer {
               () -> -driver.getRawAxis(rotationAxis), 
               () -> robotCentric.getAsBoolean()      
               ));
-      Command lockGroupgtimed = lockGroup.withTimeout(3);
+      Command lockGroupgtimed = lockGroup.withTimeout(1);
 
       indexerCmd = new SequentialCommandGroup(
-        new WaitCommand(1.5),
+        new WaitCommand(0.25),
         new intake_IndexerAuto(I_Intake, I_Indexer)
       );
       indexerStopCommand = new SequentialCommandGroup(
@@ -174,13 +176,19 @@ public class RobotContainer {
         new Intake_IndexerReverse(I_Intake, I_Indexer)
       );
 
-
-      Command indexerStopTimed = indexerStopCommand.withTimeout(.05);
-      Command indexerTimed = indexerCmd.withTimeout(3);
-      Command indexerReverse = indexerinverted.withTimeout(.5);
+      Command shooterReverseCommand = new ShooterReverse(S_Shooter);
+      Command ShooterReverseTime = shooterReverseCommand.withTimeout(0.5);
+      Command indexerStopTimed = indexerStopCommand.withTimeout(.005);
+      Command indexerTimed = indexerCmd.withTimeout(1.5);
+      Command indexerReverse = indexerinverted.withTimeout(.25);
       //Command indexerRunThing = indexerCmd.withTimeout(4);
       Command StopShooterCommand = new StopShooterCommand(S_Shooter);
+      Command StopShooterTime = StopShooterCommand.withTimeout(.025);
       //Command StopShooterInstant = new InstantCommand(new StopShooterCommand(S_Shooter));
+      Command ShooterRev = new ShooterSpeedup(S_Shooter);
+      Command TimedRev = ShooterRev.withTimeout(1.5);
+      Command RunShooter = new RunShooter(S_Shooter);
+      Command RunShooterTime = RunShooter.withTimeout(.5);
       
               
 
@@ -188,8 +196,10 @@ public class RobotContainer {
       NamedCommands.registerCommand("IndexerRun", indexerTimed);
       NamedCommands.registerCommand("indexer Stop", indexerStopTimed);
       NamedCommands.registerCommand("indexer Reverse", indexerReverse);
-      //NamedCommands.registerCommand("Indexer4Reverse", indexerRunThing);
-
+      NamedCommands.registerCommand("Indexer4Reverse", indexerTimed);
+      NamedCommands.registerCommand("ShooterReverse", ShooterReverseTime);
+      NamedCommands.registerCommand("ShooterRev", TimedRev);
+      NamedCommands.registerCommand("RunShooter", RunShooterTime);
 
 
       // Build an auto chooser. This will use Commands.none() as the default option.
@@ -200,7 +210,7 @@ public class RobotContainer {
       NamedCommands.registerCommand("Lock Print", Commands.print("RUNNING LOCK SEQUENCE"));
       NamedCommands.registerCommand("Lock FINISHED Print", Commands.print("LOCK SEQUENCE FINISHED"));
       NamedCommands.registerCommand("Intaked Print", Commands.print("INTAKE RAN"));
-      NamedCommands.registerCommand("Stop Shooter", StopShooterCommand);
+      NamedCommands.registerCommand("Stop Shooter", StopShooterTime);
       NamedCommands.registerCommand("SHOOTER RUN", RunShooter);
       NamedCommands.registerCommand("Intake & Indexer", intake_Indexer);
       NamedCommands.registerCommand("indexer ONLY", RunIndexerCommand);

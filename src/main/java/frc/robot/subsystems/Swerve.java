@@ -85,8 +85,8 @@ public class Swerve extends SubsystemBase {
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCANcoder().getDegrees());
-            //SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-          //  SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
         //field.setRobotPose(getPose());
         //System.out.println(gyro.getAccelerationX());
@@ -103,8 +103,8 @@ public class Swerve extends SubsystemBase {
                     getHeading()
                 )
                 : new ChassisSpeeds(
-                        translation.getX(),
-                        translation.getY(),
+                    translation.getX(),
+                    translation.getY(),
                         rotation)
                 );
     SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, constants.Swerve.maxSpeed);
@@ -213,25 +213,21 @@ public void resetModulesToAbsolute(){
         );
     }
     public ChassisSpeeds getSpeeds() {
-        return constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
+        return (constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates()));
       }
     
 
     public void driveRobotRelative(ChassisSpeeds robotRelativeSpeeds) {
-        ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(robotRelativeSpeeds, 0.02);
-
-
-        SwerveModuleState[] targetStates = constants.Swerve.swerveKinematics.toSwerveModuleStates(targetSpeeds);
+        SwerveModuleState[] targetStates = constants.Swerve.swerveKinematics.toSwerveModuleStates(robotRelativeSpeeds);
         setStates(targetStates);
-
-        
     }
 
     public void setStates(SwerveModuleState[] targetStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(targetStates, constants.Swerve.maxSpeed);
-    
+        // Increase the value as needed (e.g., 1.0 for 1 m/s)
+        SwerveDriveKinematics.desaturateWheelSpeeds(targetStates, 4.5); 
+        
         for (int i = 0; i < mSwerveMods.length; i++) {
-            mSwerveMods[i].setDesiredState(targetStates[i], false);
+          mSwerveMods[i].setDesiredState(targetStates[i], false);
         }
       }
 

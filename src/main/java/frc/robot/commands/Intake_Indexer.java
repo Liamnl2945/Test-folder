@@ -29,7 +29,7 @@ public class Intake_Indexer extends Command {
 
         if (!indexer.limitSwitchLeft.get() && !indexer.limitSwitchRight.get()) {
         // Safe to run the indexer
-        System.out.println("NEITHER LIMIT SWITCHES ACTIVE READY to run");
+        //System.out.println("NEITHER LIMIT SWITCHES ACTIVE READY to run");
     } 
     else {
         // Stop the indexer if any limit switch is activated
@@ -38,12 +38,12 @@ public class Intake_Indexer extends Command {
     }
         if(intakeStick.getPOV() == 0 || intakeStick.getPOV() == 45 || intakeStick.getPOV() == 315){
             if(frc.robot.subsystems.indexer.limitSwitchLeft.get() && frc.robot.subsystems.indexer.limitSwitchRight.get()){
-                System.out.println("RUNNING INTAKE & INDEXER");
+                //System.out.println("RUNNING INTAKE & INDEXER");
             intake.runIntake();
             indexer.runIndexer();
             }
             else{
-                System.out.println("NOT RUNNING INTAKE & INDEXER");
+                //System.out.println("NOT RUNNING INTAKE & INDEXER");
                 intake.stopIntake();
                 indexer.stopIndexer();
             }

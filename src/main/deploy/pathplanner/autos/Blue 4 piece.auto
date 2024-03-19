@@ -33,6 +33,12 @@
         {
           "type": "named",
           "data": {
+            "name": "ShooterRev"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "Stop Shooter"
           }
         },
@@ -87,41 +93,9 @@
           }
         },
         {
-          "type": "sequential",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShooterReverse"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Reverse"
-                }
-              },
-              {
-                "type": "parallel",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Blue piece 1 return"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ShooterRev"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "pathName": "Blue piece 1 return"
           }
         },
         {
@@ -191,6 +165,87 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Lock Sequence"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IndexerRun"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stop Shooter"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Indexer4Reverse"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue piece 3 "
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShooterRev"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "indexer Stop"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "indexer Reverse"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "indexer Stop"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue piece 3 return"
           }
         },
         {
