@@ -29,17 +29,31 @@ public class Climber extends SubsystemBase{
      }
 
      public static void climbUpLeft(double speed){
-      //System.out.println(botLimitSwitch.get());
-      if(botLimitSwitch.get()){
-        climberLeft.set(speed); 
+    // System.out.println(botLimitSwitch.get());
+
+     climberLeft.set(0);
+      if(speed < 0){ // if up
+         climberLeft.set(speed);
+         //System.out.println("GOING UP");
+      }
+      else if(speed > 0 && !botLimitSwitch.get()){ //if down and no switch
+         climberLeft.set(speed);
+         //System.out.println("GOING DOWN");
+
+      }
+      else if(speed > 0 && botLimitSwitch.get()){ //if down and switch
+         climberLeft.set(0);
+         //System.out.println("HIT THE BOTTOM & GOING DOWN");
+
+      }
+      else if(botLimitSwitch.get()){
+         climberLeft.set(0);
+         //System.out.println("HIT THE LIMIT SWITHC");
+
+      }
      }
-     else{
-      climberLeft.set(0);
-     }
      
-   }
-     
-     
+    
 }
 
 

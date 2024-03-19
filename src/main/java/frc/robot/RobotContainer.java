@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -39,12 +40,14 @@ import frc.robot.commands.intake_IndexerAuto;
 import frc.robot.commands.intake_indexerStop;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.LEDSubsystem;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Swerve;
 import frc.robot.subsystems.indexer;      
 
 public class RobotContainer {
-   
+   //LED subsystem
+   private final LEDSubsystem m_LedSubsystem = new LEDSubsystem();
    //intake
    private final Intake I_Intake = new Intake();
    //indexer
@@ -149,7 +152,7 @@ public class RobotContainer {
 
     
     public RobotContainer(){
-
+      CommandScheduler.getInstance().registerSubsystem(m_LedSubsystem);
       lockGroup = new ParallelCommandGroup(
       new SetShooterSpeedAuto(S_Shooter),
       new SwerveAim(s_Swerve, 
