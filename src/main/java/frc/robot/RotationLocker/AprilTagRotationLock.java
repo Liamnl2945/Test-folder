@@ -1,5 +1,7 @@
 package frc.robot.RotationLocker;
 
+// this code will self destruct in 48 hours 💣
+
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.limelightData;
 

@@ -1,0 +1,56 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 15.741770256716208,
+      "y": 4.602358762494137
+    },
+    "rotation": -122.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red source side start"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red source side return"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunShooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IndexerRun"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stop Shooter"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Red Autos",
+  "choreoAuto": false
+}

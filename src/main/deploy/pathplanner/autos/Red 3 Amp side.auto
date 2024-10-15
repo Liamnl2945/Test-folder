@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 15.4138668334398,
-      "y": 5.550936522700434
+      "x": 15.800324439450591,
+      "y": 6.499514282908736
     },
-    "rotation": 0.0
+    "rotation": 116.56505117707799
   },
   "command": {
     "type": "sequential",
@@ -37,82 +37,50 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "Red Amp side 1 piece"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShooterReverse"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "indexer Reverse"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShooterRev"
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Red pickup 1"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShooterReverse"
+                  "pathName": "Red Amp side 1 return"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "indexer Stop"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Reverse"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Stop"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShooterReverse"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Reverse"
-                }
-              },
-              {
-                "type": "parallel",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "Red return 1"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "ShooterRev"
-                      }
-                    }
-                  ]
+                  "name": "ShooterRev"
                 }
               }
             ]
@@ -138,53 +106,15 @@
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "Stop Shooter"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "indexer Stop"
+            "pathName": "Red Amp midline pickup"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "red pickup 2"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "red return 2"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "indexer Reverse"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "indexer Stop"
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
+            "pathName": "Red Amp midline Return"
           }
         },
         {

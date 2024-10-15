@@ -1,25 +1,13 @@
 package frc.robot;
 
-import java.util.List;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.GoalEndState;
-import com.pathplanner.lib.path.PathConstraints;
-import com.pathplanner.lib.path.PathPlannerPath;
-
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -154,7 +142,7 @@ public class RobotContainer {
 
     
     public RobotContainer(){
-      CommandScheduler.getInstance().registerSubsystem(m_LedSubsystem);
+      //CommandScheduler.getInstance().registerSubsystem(m_LedSubsystem);
       lockGroup = new ParallelCommandGroup(
       new SetShooterSpeedAuto(S_Shooter),
       new SwerveAim(s_Swerve, 
@@ -234,7 +222,7 @@ public class RobotContainer {
       //shooterButton.whileTrue(new SetShooterSpeedByAprilTag(S_Shooter));
       //shooterButton.whileFalse(new InstantCommand(()-> S_Shooter.stopShooter()));
 
-
+      SmartDashboard.putData("Climber limit switch", Climber.botLimitSwitch);
       
       // Register Named Commands
         //NamedCommands.registerCommand("autoBalance", s_Swerve.ExamplePath());
@@ -250,7 +238,7 @@ public class RobotContainer {
               () -> robotCentric.getAsBoolean(),
               () -> aim.getAsBoolean()
           ) 
-      );
+      );  
 
         
 
@@ -270,12 +258,12 @@ public class RobotContainer {
     private void configureBindings() {
 
        /* AUTO STUFF  */
-      SmartDashboard.putData("Blue Auto Score Twice", new PathPlannerAuto("Blue 2 Auto"));
-      SmartDashboard.putData("Test", new PathPlannerAuto("Test"));
-      SmartDashboard.putData("Example", new PathPlannerAuto("New Auto"));
+      //SmartDashboard.putData("Blue Auto Score Twice", new PathPlannerAuto("Blue 2 Auto"));
+      //SmartDashboard.putData("Test", new PathPlannerAuto("Test"));
+      //SmartDashboard.putData("Example", new PathPlannerAuto("New Auto"));
 
       // Add a button to run the example auto to SmartDashboard, this will also be in the auto chooser built above
-      SmartDashboard.putData("Example Auto", new PathPlannerAuto("New Auto"));
+      //SmartDashboard.putData("Example Auto", new PathPlannerAuto("New Auto"));
     
   }
 

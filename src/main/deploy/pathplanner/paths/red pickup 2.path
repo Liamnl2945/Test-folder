@@ -8,36 +8,36 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.195939832678524,
-        "y": 6.124767513443729
+        "x": 14.378880394501454,
+        "y": 5.556317206313683
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 14.793192496519858,
-        "y": 7.038212764014687
+        "x": 14.476999909777279,
+        "y": 6.979658581285779
       },
       "prevControl": {
-        "x": 15.792994540414684,
-        "y": 7.058109322102147
+        "x": 15.476184664558486,
+        "y": 7.020029682494648
       },
       "nextControl": {
-        "x": 13.793390452625031,
-        "y": 7.018316205927227
+        "x": 13.47781515499607,
+        "y": 6.93928748007691
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 13.0716995242835,
-        "y": 7.038212764014687
+        "x": 12.77892861063896,
+        "y": 6.979658581285779
       },
       "prevControl": {
-        "x": 14.070884279064709,
-        "y": 7.0785838652235595
+        "x": 12.71907476762337,
+        "y": 6.9754731928611315
       },
       "nextControl": null,
       "isLocked": false,
@@ -49,7 +49,7 @@
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 1.0,
+      "waypointRelativePos": 0.75,
       "command": {
         "type": "parallel",
         "data": {
@@ -90,13 +90,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": 0.16518208083816652,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "Red Paths",
   "previewStartingState": {
-    "rotation": 180.0,
+    "rotation": -0.5983051056677622,
     "velocity": 0
   },
   "useDefaultConstraints": true

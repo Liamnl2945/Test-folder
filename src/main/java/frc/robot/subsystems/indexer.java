@@ -1,14 +1,16 @@
 package frc.robot.subsystems;
 
+//impotes
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants;
-
+//cant wait to rewrite it all from the ground up
 public class indexer extends SubsystemBase {
-
+    // var decs
     private final WPI_TalonSRX indexerRight = new WPI_TalonSRX(constants.indexer.indexerRight);
     private final WPI_TalonSRX indexerLeft = new WPI_TalonSRX(constants.indexer.indexerLeft);
     public final static DigitalInput limitSwitchRight = new DigitalInput(constants.indexer.limitSwitchRightPort);

@@ -41,7 +41,8 @@ public void slowReverseIntake(){
     intakeBot.set(-.2);
     //System.out.println("REVERSE INTAKE SLOW \n\n\n");
 }
-
+//something funnier than what walden would have wrote
+//thats not very funny -Walden
 public void stopIntake(){
     intakeTop.set(0);
     intakeBot.set(0);

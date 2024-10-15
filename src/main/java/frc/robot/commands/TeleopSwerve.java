@@ -76,7 +76,7 @@ public class TeleopSwerve extends Command {
     public void execute() {
        // System.out.println("\n SHOOTER LOCK WORKS");
         if (limelightData.targetValid && RobotContainer.aim.getAsBoolean()) {//if limelight sees tag and the aiming is pressed
-                    //System.out.println("\n AIM LOCKED");
+                    //System.out.println("\n AIM LOCKED");4
 
             if (limelightData.tagID == 4 || limelightData.tagID == 7) {//Speaker logic
                         //System.out.println("\n SHOOTER LOCKED To Speaker");
@@ -145,7 +145,7 @@ public class TeleopSwerve extends Command {
         // Drive
         s_Swerve.drive(
             new Translation2d(translationVal, strafeVal).times(!RobotContainer.slowMove.getAsBoolean() ? constants.Swerve.maxSpeed : constants.Swerve.maxSpeed*0.15), 
-            !RobotContainer.slowMove.getAsBoolean() ? rotationVal * constants.Swerve.maxAngularVelocity : rotationVal * constants.Swerve.maxAngularVelocity * 0.3,
+            !RobotContainer.slowMove.getAsBoolean() ? rotationVal * constants.Swerve.maxAngularVelocity : -rotationVal * constants.Swerve.maxAngularVelocity * 0.25,
             !robotCentricSup.getAsBoolean(), 
             true
         );

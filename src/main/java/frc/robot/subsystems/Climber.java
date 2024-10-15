@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -35,6 +34,7 @@ public class Climber extends SubsystemBase{
       if(speed < 0){ // if up
          climberLeft.set(speed);
          //System.out.println("GOING UP");
+         //SOMEBODYONCETOLDMETHEWORLDWASGONNAROLLME
       }
       else if(speed > 0 && !botLimitSwitch.get()){ //if down and no switch
          climberLeft.set(speed);
@@ -48,7 +48,8 @@ public class Climber extends SubsystemBase{
       }
       else if(botLimitSwitch.get()){
          climberLeft.set(0);
-         //System.out.println("HIT THE LIMIT SWITHC");
+         //System.out.println("HIT THE LIMIT SWITCH");
+         //Ifixxed 
 
       }
      }

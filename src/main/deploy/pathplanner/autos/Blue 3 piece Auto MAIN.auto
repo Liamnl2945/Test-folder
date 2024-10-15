@@ -5,7 +5,7 @@
       "x": 1.2437546130441748,
       "y": 5.515804013063089
     },
-    "rotation": 0
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -28,12 +28,6 @@
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShooterRev"
           }
         },
         {
@@ -68,7 +62,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ShooterRev"
+                  "name": "ShooterReverse"
                 }
               },
               {
@@ -93,9 +87,41 @@
           }
         },
         {
-          "type": "path",
+          "type": "sequential",
           "data": {
-            "pathName": "Blue piece 1 return"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShooterReverse"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "indexer Reverse"
+                }
+              },
+              {
+                "type": "parallel",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "Blue piece 1 return"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "ShooterRev"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
@@ -105,7 +131,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -174,88 +200,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "IndexerRun"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Stop Shooter"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Indexer4Reverse"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue piece 3 "
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "sequential",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShooterRev"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Stop"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Reverse"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "indexer Stop"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue piece 3 return"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {

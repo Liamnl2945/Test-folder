@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import frc.robot.SwerveModule;
 import frc.robot.constants;
-import frc.robot.commands.SetShooterSpeedByAprilTag;
-import frc.robot.commands.TeleopSwerve;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -12,25 +10,12 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.commands.FollowPathHolonomic;
-import com.pathplanner.lib.path.PathPlannerPath;
-import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
-import com.pathplanner.lib.util.PIDConstants;
-import com.pathplanner.lib.util.PathPlannerLogging;
-import com.pathplanner.lib.util.ReplanningConfig;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 
 
 public class Swerve extends SubsystemBase {
@@ -59,7 +44,7 @@ public class Swerve extends SubsystemBase {
 
 
          AutoBuilder.configureHolonomic(
-            this::getPose,
+            this::getPoseAutonomous,
             this::resetPose,
             this::getSpeeds,
             this::driveRobotRelative,
@@ -94,6 +79,7 @@ public class Swerve extends SubsystemBase {
     }
 
    public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
+    rotation = -rotation;
     SwerveModuleState[] swerveModuleStates = 
         constants.Swerve.swerveKinematics.toSwerveModuleStates(
             fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
@@ -143,6 +129,11 @@ public Pose2d getPose() {
     return swerveOdometry.getPoseMeters();
 }
 
+public Pose2d getPoseAutonomous() {
+    Pose2d temp = swerveOdometry.getPoseMeters();
+    return new Pose2d(swerveOdometry.getPoseMeters().getTranslation(), new Rotation2d(-temp.getRotation().getRadians()));
+}
+//there is a very low chance anybody else will see these comments
 public void setPose(Pose2d pose) {
     swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
 }

@@ -29,7 +29,7 @@ public class SetShooterSpeedByAprilTag extends InstantCommand {
                     //System.out.println("\n\n BLUE Speaker DETECTED");
                     break;
                 case 5:  // Adjust speed for RED AMP
-                    speed = 0.175;  // Example speed for Tag 1
+                    speed = 1;  // Example speed for Tag 1
                    //System.out.println("\n\n RED AMP DETECTED");
                     break;
                 case 4:  // Adjust speed for RED SPEAKER

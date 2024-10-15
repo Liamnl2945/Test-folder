@@ -1,0 +1,50 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.7911138899200891,
+      "y": 6.5220491979445505
+    },
+    "rotation": 60.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunShooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IndexerRun"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stop Shooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue Amp side backout"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Blue Autos",
+  "choreoAuto": false
+}

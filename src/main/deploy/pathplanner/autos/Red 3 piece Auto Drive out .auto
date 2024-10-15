@@ -205,6 +205,24 @@
               }
             ]
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "indexer Stop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stop Shooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red Drive out "
+          }
         }
       ]
     }

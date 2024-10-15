@@ -54,10 +54,11 @@ public class limelightData {
         else{
             targetValid = false; ;  
         }
-
+        //☆*: .｡. o(≧▽≦)o .｡.:*☆
       // System.out.println(Math.sqrt((XC*XC)+(YC*YC)+(ZC*ZC)));
        // System.out.println("Roll: " + targetRoll + "   Pitch: " + targetPitch + "   Yaw: " + targetYaw);
         //System.out.println("X: " + targetXC + "   Y: " + targetYC + "   Z: " + targetZC);
         //System.out.println("Distance to Tag: " + distance);
     }
 }
+//skib

@@ -1,0 +1,62 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 15.753481093267464,
+      "y": 6.534646792546081
+    },
+    "rotation": 120.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "RunShooter"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "IndexerRun"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Stop Shooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "indexer Stop"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 11.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red shoot & wait"
+          }
+        }
+      ]
+    }
+  },
+  "folder": "Red Autos",
+  "choreoAuto": false
+}

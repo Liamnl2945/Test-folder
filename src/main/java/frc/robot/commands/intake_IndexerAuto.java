@@ -20,7 +20,7 @@ public class intake_IndexerAuto extends Command {
         addRequirements(intake);
         addRequirements(indexer);
     }
-
+// walden went all in 
     @Override
     public void execute(){
         System.out.println("INTAKE & INDEXER RUNNING");

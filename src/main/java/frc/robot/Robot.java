@@ -4,19 +4,12 @@
 
 package frc.robot;
 
+//importes
+
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.CvSink;
-import edu.wpi.first.cscore.CvSource;
-import edu.wpi.first.cscore.MjpegServer;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.net.PortForwarder;
-import edu.wpi.first.util.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -36,7 +29,7 @@ public class Robot extends TimedRobot {
 
   public static CTREConfigs ctreConfigs;
 
-
+// what the skib
 
   public ShuffleboardTab limelightTab;
 

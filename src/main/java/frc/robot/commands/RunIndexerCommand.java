@@ -7,14 +7,14 @@ import frc.robot.subsystems.indexer;
 public class RunIndexerCommand extends Command {
 
     private final indexer indexer;
-    private final Timer timer = new Timer();
+
 
 
     public RunIndexerCommand(indexer indexer) {
         this.indexer = indexer;
         addRequirements(indexer);
     }
-
+    //FLOOP
     @Override
     public void initialize() {
         indexer.runIndexer();  // Start the indexer

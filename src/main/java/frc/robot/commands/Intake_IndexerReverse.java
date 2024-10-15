@@ -23,6 +23,8 @@ public class Intake_IndexerReverse extends Command {
         addRequirements(indexer);
     }
 
+// this is certified intake indexing reverse
+
     @Override
     public void execute(){
         System.out.println("INTAKE & INDEXER INVERTED");
@@ -33,6 +35,7 @@ public class Intake_IndexerReverse extends Command {
             indexer.runIndexer();
             System.out.println("\n INTAKE & INDEXER IN!!!");
         }
+        disabled code goes brrrrrrrrrrrrrrrrrrrrrrrrr
         else if(intakeStick.getPOV() == 135 || intakeStick.getPOV() == 180 || intakeStick.getPOV() == 225){
             intake.reverseIntake();
             indexer.reverseIndexer();

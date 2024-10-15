@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.9392728628538557,
-      "y": 6.499514282908736
+      "x": 15.749399191106074,
+      "y": 6.512182255133741
     },
-    "rotation": -136.46880071438602
+    "rotation": 123.07754859797134
   },
   "command": {
     "type": "sequential",
@@ -18,7 +18,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Lock Sequence"
+                  "name": "RunShooter"
                 }
               },
               {
@@ -33,12 +33,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Amp Backup"
+            "pathName": "Red Amp Getout"
           }
         }
       ]
     }
   },
-  "folder": "Blue Autos",
+  "folder": "Red Autos",
   "choreoAuto": false
 }

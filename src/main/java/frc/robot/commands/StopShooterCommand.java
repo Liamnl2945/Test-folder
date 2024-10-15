@@ -10,7 +10,7 @@ public class StopShooterCommand extends InstantCommand {
     public StopShooterCommand(Shooter shooter) {
         this.shooter = shooter;
     }
-
+    //POLICE COULD STAND TO LEARN FROM THIS
     @Override
     public void execute() {
         shooter.stopShooter(); // Call the stopShooter function within the command

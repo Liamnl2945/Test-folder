@@ -12,7 +12,7 @@ public class LEDSubsystem extends SubsystemBase{
     private CANdle candle = new CANdle(20);
 
     // Create a rainbow animation
-
+    //rAiNbOwS
 
     private static final RainbowAnimation rainbowAnimation = new RainbowAnimation(1, 1, 0);
     private static final FireAnimation fireAnimation = new FireAnimation(1, 1, 0, 0.5, 0.8);

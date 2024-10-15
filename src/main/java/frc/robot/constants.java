@@ -9,14 +9,13 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public class constants {
 
-    public static final double stickDeadband = 0.15;
+    public static final double stickDeadband = 0.10;
     
     public final class Intake{
         public static final int intakeBot = 9;
@@ -38,7 +37,7 @@ public class constants {
     public final class Climber {
         public static final int climberLeft = 14;
         //public static final int climberRight = 15;
-        public static final int botLimitSwitch = 2;
+        public static final int botLimitSwitch = 8;
     }
     public final class LimelightConstants{
         public static final int PIPELINE_VISION = 0;
@@ -95,7 +94,8 @@ public class constants {
         public static final double angleKP = chosenModule.angleKP;
         public static final double angleKI = chosenModule.angleKI;
         public static final double angleKD = chosenModule.angleKD;
-
+        
+        //PickLis cage
         /* Drive Motor PID Values */
         public static final double driveKP = 0.12; //TODO: This must be tuned to specific robot
         public static final double driveKI = 0.0;
@@ -122,39 +122,39 @@ public class constants {
         /* Front Left Module - Module 0 */
         public static final class Mod0 { //TODO: This must be tuned to specific robot
             public static final int driveMotorID = 0;
-            public static final int angleMotorID = 1;
+            public static final int angleMotorID = 4;
             public static final int canCoderID = 0;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(173.30);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-6.75);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
         /* Front Right Module - Module 1 */
         public static final class Mod1 { //TODO: This must be tuned to specific robot
-            public static final int driveMotorID = 2;
-            public static final int angleMotorID = 3;
+            public static final int driveMotorID = 1;
+            public static final int angleMotorID = 5;
             public static final int canCoderID = 1;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-112.7  );
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-135.75);
             public static final SwerveModuleConstants constants = 
             new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
         
         /* Back Left Module - Module 2 */
         public static final class Mod2 { //TODO: This must be tuned to specific robot
-            public static final int driveMotorID = 4;
-            public static final int angleMotorID = 5;
+            public static final int driveMotorID = 2;
+            public static final int angleMotorID = 6;
             public static final int canCoderID = 2;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-2.6);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-111.18);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
         /* Back Right Module - Module 3 */
         public static final class Mod3 { //TODO: This must be tuned to specific robot
-            public static final int driveMotorID = 6;
+            public static final int driveMotorID = 3;
             public static final int angleMotorID = 7;
             public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-147.3);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(58.1);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -163,15 +163,14 @@ public class constants {
             return 0;
         }
 
-        public void drive(Translation2d times, double d, boolean b, boolean c) {
-        }
+
 
         public void setDrivesMode(NeutralModeValue brake) {
         }
 
         public static final HolonomicPathFollowerConfig pathFollowerConfig = new HolonomicPathFollowerConfig(
       new PIDConstants(5.0, 0.5, 0.0), // Translation constants 
-      new PIDConstants(5.0,0.0, 0.0), // Rotation constants 
+      new PIDConstants(5.0, 0.0, 0.0), // Rotation constants 
       4.5, 
       0.43, // Drive base radius (distance from center to furthest module) 
       new ReplanningConfig()
